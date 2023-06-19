@@ -3,16 +3,16 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 // import logo from './logo.svg';
 //Home Import all
-import HomeHeader from './Layouts/Header/HomeHeader.mjs';
-import Home from './Pages/Home.mjs';
-import About from './Pages/About.mjs';
-import Contact from './Pages/Contact.mjs';
-import Service from './Pages/Service.mjs';
-import NotFound from './Pages/NotFound.mjs';
+import HomeHeader from './Layouts/Header/HomeHeader';
+import Home from './Pages/Home';
+import About from './Pages/About';
+import Contact from './Pages/Contact';
+import Service from './Pages/Service';
+import NotFound from './Pages/NotFound';
 // User all import
-import ProfileHeader from './Layouts/Header/ProfileHeader.mjs';
-import Profile from './Pages/User/Profile.mjs';
-import Setting from './Pages/User/Setting.mjs';
+import ProfileHeader from './Layouts/Header/ProfileHeader';
+import Profile from './Pages/User/Profile';
+import Setting from './Pages/User/Setting';
 
 import './App.css';
 

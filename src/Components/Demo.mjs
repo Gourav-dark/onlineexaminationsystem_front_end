@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect,useState } from "react";
 
-export default function Home() {
+export default function Demo() {
   const [institutelist, setinstitutelist] = useState([]);
   useEffect(() => {
     axios
@@ -14,7 +14,6 @@ export default function Home() {
   },[]);
   return (
     <div>
-      <h1>Home Pages</h1>
       {
         institutelist.map((InstituteDetail) => { 
           const { id, instituteName, location, city, postalCode, state, country } = InstituteDetail;
