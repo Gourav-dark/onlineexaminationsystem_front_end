@@ -12,8 +12,13 @@ import NotFound from './Pages/NotFound';
 // User all import
 import ProfileHeader from './Layouts/Header/ProfileHeader';
 import Profile from './Pages/User/Profile';
+import Login from './Pages/User/Login';
+import Register from './Pages/User/Register';
 import Setting from './Pages/User/Setting';
 
+//css
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.js";
 import './App.css';
 
 function App() {
@@ -26,6 +31,8 @@ function App() {
             <Route path='service' element={<Service/>}/>
             <Route path='about' element={<About/>}/>
             <Route path='contact' element={<Contact/>}/>
+            {/* <Route path='register' element={<Register/>}/> */}
+            <Route path='login' element={<Login/>}/>
           </Route>
           <Route path='/profile' element={<ProfileHeader />}>
             <Route index element={<Profile />} />
