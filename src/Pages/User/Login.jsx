@@ -1,57 +1,49 @@
 
-import URL from "../../Config/Config";
-import axios from "axios";
 import { useState } from "react";
+import API from "../../Config/Config";
+
 const Login = () => {
-  const [Email, setEmail] = useState("");
-  const [Password, setPassword] = useState("");
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    switch (name) {
-      case "Email":
-          setEmail(value);
-          break;
-      case "Password":
-          setPassword(value);
-          break;
-      default:
-            break;
-    }
-  };
-  const loginDetail=JSON.stringify(
+  const [Error, setError] = useState('');
+  const [Response, setResponse] = useState('');
+  const [LoginDetail, setLoginDetail] = useState(
     {
-      Email,Password
-    }
-  );
-  const customConfig = {
-    headers: {
-    'Content-Type': 'application/json'
-    }
-  };
-  const handleSubmit=()=>{
-    const url=URL+"User/Login";
-    console.log(url);
-    console.log(loginDetail);
-    console.log(customConfig);
-    axios
-    .post(url,loginDetail)
-    .then((response) =>{
-      console.log(response);
+      Email: "admin@gmail.com",
+      Password:"Admin@12"
     });
+  const handleInput = (event) => {
+    const { name, value } = event.target;
+    setLoginDetail((prev) => {
+      return { ...prev, [name]: value };
+     });
+  }
+  const handleSubmit = async() => {
+    // console.log(LoginDetail);
+    try {
+      const res =await API.post("Users/Login", LoginDetail);
+      const { token,massage } = res.data;
+      console.log(res.data);
+      setResponse(token + " " + massage);
+      
+    } catch (error) {
+      console.log(error);
+      const { massage } = error.response.data;
+      setError(massage);
+      console.log(error);
+    }
   }
   return (
     <div>
-      {/* <form> */}
       <label>
           Email:
-          <input type="email" name="Email" value={Email} onChange={handleInputChange} />
+          <input type="email" name="Email" value={LoginDetail.Email} onChange={handleInput} />
       </label>
       <label>
           Password:
-          <input type="password" name="Password" value={Password} onChange={handleInputChange} />
+          <input type="password" name="Password" value={LoginDetail.Password} onChange={handleInput} />
       </label>
       <button onClick={handleSubmit}>Submit</button>
-      {/* </form> */}
+      {Error !== "" && <h1>{Error}</h1>}
+      <h1>{Response}</h1>
     </div>
   )
 }

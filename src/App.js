@@ -13,8 +13,8 @@ import NotFound from './Pages/NotFound';
 import ProfileHeader from './Layouts/Header/ProfileHeader';
 import Profile from './Pages/User/Profile';
 import Login from './Pages/User/Login';
-import Register from './Pages/User/Register';
 import Setting from './Pages/User/Setting';
+// import Register from './Pages/User/Register';
 
 //css
 import "bootstrap/dist/css/bootstrap.min.css";

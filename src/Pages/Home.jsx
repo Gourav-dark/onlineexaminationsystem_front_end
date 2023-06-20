@@ -1,6 +1,6 @@
-import slider_1 from "../Assets/Images/slider_01.jpg";
-import slider_2 from "../Assets/Images/slider_02.jpg";
-import slider_3 from "../Assets/Images/slider_03.jpg";
+// import slider_1 from "../Assets/Images/slider_01.jpg";
+// import slider_2 from "../Assets/Images/slider_02.jpg";
+// import slider_3 from "../Assets/Images/slider_03.jpg";
 
 const Home = () =>{
   return (
