@@ -1,0 +1,8 @@
+.Home {
+    display: flex;
+    justify-content: center;
+}
+.Home .my_slider{
+    margin-top: 1rem;
+    width: 60%;
+}

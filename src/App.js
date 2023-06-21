@@ -9,12 +9,15 @@ import About from './Pages/About';
 import Contact from './Pages/Contact';
 import Service from './Pages/Service';
 import NotFound from './Pages/NotFound';
-// User all import
+// login and Regis
+import Login from './Pages/User/Login';
+import SignUp from './Pages/User/SignUp';
+import Users from './Pages/Registration/Users';
+import InstituteUser from './Pages/Registration/InstituteUser';
+//profile
 import ProfileHeader from './Layouts/Header/ProfileHeader';
 import Profile from './Pages/User/Profile';
-import Login from './Pages/User/Login';
 import Setting from './Pages/User/Setting';
-// import Register from './Pages/User/Register';
 
 //css
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -31,7 +34,10 @@ function App() {
             <Route path='service' element={<Service/>}/>
             <Route path='about' element={<About/>}/>
             <Route path='contact' element={<Contact/>}/>
-            {/* <Route path='register' element={<Register/>}/> */}
+            <Route path='signup' element={<SignUp/>}>
+              <Route index path='users' element={<Users/>}/>
+              <Route path='instituteuser' element={<InstituteUser/>}/>
+            </Route>
             <Route path='login' element={<Login/>}/>
           </Route>
           <Route path='/profile' element={<ProfileHeader />}>
