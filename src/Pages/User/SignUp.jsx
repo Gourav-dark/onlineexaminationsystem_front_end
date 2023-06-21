@@ -1,13 +1,17 @@
+import { NavLink, Outlet } from "react-router-dom";
 import "../../Assets/Styles/SignUp.css";
 const SignUp = () => {
   return (
-    <div className="SignUp">
-      <div class="btn-group btn-group-lg SignUp-btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-secondary">Student</button>
-        <button type="button" class="btn btn-secondary">Examiner</button>
-        <button type="button" class="btn btn-secondary">Institute User</button>
+    <>
+      <div className="SignUp">
+        <div className="btn-group btn-group-lg SignUp-btn-group mt-1" role="group" aria-label="Basic example">
+          <NavLink to="student" type="button" className="btn btn-outline-light px-2 px-md-5 px-sm-4">Student</NavLink>
+          <NavLink to="examiner" type="button" className="btn btn-outline-light px-2 px-md-5 px-sm-4">Examiner</NavLink>
+          <NavLink to="instituteuser" type="button" className="btn btn-outline-light px-2 px-md-4 px-sm-3">Institute User</NavLink>
+        </div>
       </div>
-    </div>
+      <Outlet/>
+    </>
   )
 }
 

@@ -1,8 +1,8 @@
 const InstituteUser = () => {
   return (
-    <div>
-      <h1>Institute User</h1>
-    </div>
+    // <div>
+      <h1 className="bg-danger">Institute User</h1>
+    // </div>
   )
 }
 
