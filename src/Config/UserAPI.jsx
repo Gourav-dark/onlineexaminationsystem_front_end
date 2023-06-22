@@ -2,10 +2,10 @@ import API from "./Config";
 // import { useCookies } from 'react-cookie';
 
 
-// 1.Login Page 
+// 1.Login Page ---POST
 const useLoginAPI = () => {
   // const [Cookies,setCookie] = useCookies(['UserLoginDetail']);
-  const response = {
+  const Response = {
       Massage: "Page Not Found",
       StatusCode: 404
     };
@@ -14,15 +14,15 @@ const useLoginAPI = () => {
       const res = await API.post("Users/Login", loginDetail);
       // const { token, massage } = res.data;
       const { massage } = res.data;
-      response.Massage = massage;
-      response.StatusCode = res.status;
+      Response.Massage = massage;
+      Response.StatusCode = res.status;
       // setCookie('AccessCode', token);
     } catch (error) {
       const { massage } = error.response.data;      
-      response.Massage = massage;
-      response.StatusCode = error.response.status;
+      Response.Massage = massage;
+      Response.StatusCode = error.response.status;
     }
-    return response;
+    return Response;
   };
   return loginAPI;
 };

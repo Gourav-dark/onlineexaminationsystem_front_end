@@ -5,25 +5,7 @@
   font-family: 'Poppins',sans-serif;
 }
 body{
-  height: 100vh;
-  width: 100%;
-  background-image: url("./Assets/Images/background.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-/* button */
-.flex-parent {
-  background-color: aliceblue;
-  width: 70%;
-  display: flex;
-  align-items: center;
-}
-
-.jc-center {
-  justify-content: center;
-}
-
-button.margin-right {
-  margin-right: 20px;
+  background: #c33764;
+  background: -webkit-linear-gradient(to right, #c33764, #1d2671); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #c33764, #1d2671);
 }

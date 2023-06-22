@@ -12,8 +12,8 @@ import NotFound from './Pages/NotFound';
 // login and Regis
 import Login from './Pages/User/Login';
 import SignUp from './Pages/User/SignUp';
-import Student from './Pages/Registration/Student';
-import Examiner from './Pages/Registration/Examiner';
+import NormalUser from './Pages/Registration/NormalUser';
+// import Examiner from './Pages/Registration/Examiner';
 import InstituteUser from './Pages/Registration/InstituteUser';
 //profile
 import ProfileHeader from './Layouts/Header/ProfileHeader';
@@ -36,8 +36,9 @@ function App() {
             <Route path='about' element={<About/>}/>
             <Route path='contact' element={<Contact/>}/>
             <Route path='signup' element={<SignUp/>}>
-              <Route path='student' element={<Student/>}/>
-              <Route path='examiner' element={<Examiner/>}/>
+              <Route path='normaluser' element={<NormalUser/>}/>
+              {/* <Route path='student' element={<Student/>}/> */}
+              {/* <Route path='examiner' element={<Examiner/>}/> */}
               <Route path='instituteuser' element={<InstituteUser/>}/>
             </Route>
             <Route path='login' element={<Login/>}/>
