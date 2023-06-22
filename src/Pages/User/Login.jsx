@@ -26,6 +26,7 @@ const Login = () => {
       setMassage(response.Massage);
     if (response.StatusCode === 200) {
       setAlertClass(alertClass + " alert-success show");
+      //Redireact Code for profile
     } else {
       setAlertClass(alertClass + " alert-danger show");
     }

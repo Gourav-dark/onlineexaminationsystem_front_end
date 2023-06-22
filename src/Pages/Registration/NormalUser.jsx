@@ -1,8 +1,9 @@
 import { useEffect,useState } from "react";
 import InstituteListAPI from "../../Config/InstituteAPI";
+import { useSignupAPI } from "../../Config/UserAPI";
 const NormalUser = () => {
   const [InstituteId,setInstituteId]=useState(0);
-  const [UserType,setUserType]=useState("");
+  const [UserType,setUserType]=useState(0);
   const [Institutelist, setInstitutelist] = useState([]);
   const [SignupDetail, setSignupDetail] = useState({
     fname: "Student",
@@ -45,9 +46,23 @@ const NormalUser = () => {
       }
     }
     ListFunction();
-  },[]);
-  const SubmitHandle=()=>{
-
+  }, []);
+  const userDetail = {
+    user:SignupDetail,
+    roleId: UserType,
+    Iid:InstituteId
+  };
+  const signupApi = useSignupAPI();
+  const SubmitHandle=async()=>{
+    const Res = await signupApi(userDetail);
+    if (Res.StatusCode === 200) {
+      console.log(Res);
+      console.log("Sign IN" + Res.Massage);
+      //Redirect Code and massage 
+    } else {
+      console.log("Sign Fails" + Res.Massage);
+      // only Massage
+    }
   }
   return (
     <div className="NormalUser-Login">
@@ -166,13 +181,13 @@ const NormalUser = () => {
                           <h6 className="">User Type : </h6>
                           <div className="form-check form-check-inline d-flex">
                             <input className="form-check-input" type="radio" name="UserType"
-                              value="Student" onChange={changeDetail}/>
+                              value="4" onChange={changeDetail}/>
                             <label className="form-check-label mx-1">Student</label>
                           </div>
 
                           <div className="form-check form-check-inline d-flex">
                             <input className="form-check-input" type="radio" name="UserType"
-                              value="Examiner" onClick={changeDetail}/>
+                              value="3" onClick={changeDetail}/>
                             <label className="form-check-label mx-1">Examiner</label>
                           </div>
                       </div>

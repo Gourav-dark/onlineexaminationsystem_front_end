@@ -95,3 +95,12 @@ export default function Demo() {
 // }
 
 // export { JwtToken };
+
+
+
+// //set cookies
+// const [cookies, setCookie] = useCookies(['user']);
+// setCookie("Name", "value",{path:"/"});
+// ///get cookie
+//  const [cookies] = useCookies(['user']);
+//     const getCookieData = cookies.Jwt;
