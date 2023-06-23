@@ -12,9 +12,7 @@ import NotFound from './Pages/NotFound';
 // login and Regis
 import Login from './Pages/User/Login';
 import SignUp from './Pages/User/SignUp';
-import NormalUser from './Pages/Registration/NormalUser';
-// import Examiner from './Pages/Registration/Examiner';
-import InstituteUser from './Pages/Registration/InstituteUser';
+
 //profile
 import ProfileHeader from './Layouts/Header/ProfileHeader';
 import Profile from './Pages/User/Profile';
@@ -35,12 +33,7 @@ function App() {
             <Route path='service' element={<Service/>}/>
             <Route path='about' element={<About/>}/>
             <Route path='contact' element={<Contact/>}/>
-            <Route path='signup' element={<SignUp/>}>
-              <Route path='normaluser' element={<NormalUser/>}/>
-              {/* <Route path='student' element={<Student/>}/> */}
-              {/* <Route path='examiner' element={<Examiner/>}/> */}
-              <Route path='instituteuser' element={<InstituteUser/>}/>
-            </Route>
+            <Route path='signup' element={<SignUp/>}/>
             <Route path='login' element={<Login/>}/>
           </Route>
           <Route path='/profile' element={<ProfileHeader />}>

@@ -7,7 +7,7 @@ import "../../Assets/Styles/Login.css";
 
 const Login = () => {
   const [massage, setMassage] = useState("");
-  const [alertClass, setAlertClass] = useState('alert alert-dismissible alert-Login position-absolute top-50 start-50 translate-middle fade');
+  const [alertClass, setAlertClass] = useState('');
   const [loginDetail, setLoginDetail] = useState({
     Email: "admin@gmail.com",
     Password: "Admin@123"
@@ -25,12 +25,15 @@ const Login = () => {
     const response = await loginAPI(loginDetail);
       setMassage(response.Massage);
     if (response.StatusCode === 200) {
-      setAlertClass(alertClass + " alert-success show");
+      setAlertClass("alert-success show");
       //Redireact Code for profile
     } else {
-      setAlertClass(alertClass + " alert-danger show");
+      setAlertClass("alert-danger show");
     }
   };
+  const HideButton=()=>{
+    setAlertClass('d-none');
+  }
   return (
     <div className='Login'>
       <section className="h-50 mt-4">
@@ -69,9 +72,9 @@ const Login = () => {
           </div>
         </div>
       </section>
-      <div className={alertClass} role="alert">
+      <div className={`alert alert-dismissible alert-Login position-absolute top-50 start-50 translate-middle fade ${alertClass}`} role="alert">
         <strong className='mx-3'>{massage}</strong> 
-        <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" className="btn-close" onClick={HideButton}></button>
       </div>
     </div>
   );
