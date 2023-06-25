@@ -5,7 +5,7 @@ import "../../Assets/Styles/HomeHeader.css";
 const HomeHeader = () => {
   return (
     <>
-    <nav className="navbar sticky-top bg-dark navbar-expand-md" data-bs-theme="dark">
+      <nav className="navbar sticky-top bg-dark navbar-expand-md" data-bs-theme="dark" style={{ zIndex:"1035" }}>
         <div className="container-fluid">
           <Link to="/" className="navbar-brand fs-6 initialism">Online Examination System</Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">

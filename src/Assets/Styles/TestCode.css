@@ -1,0 +1,23 @@
+.sidebar {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 100;
+      padding: 48px 0;
+      background-color: #f8f9fa;
+    }
+
+    /* Custom styling for sidebar links */
+    .sidebar a {
+      display: block;
+      padding: 8px 16px;
+      color: #343a40;
+      text-decoration: none;
+    }
+
+    /* Custom styling for active sidebar link */
+    .sidebar a.active {
+      background-color: #007bff;
+      color: #fff;
+    }

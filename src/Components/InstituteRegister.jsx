@@ -10,7 +10,7 @@ const InstituteRegister = () => {
             "state": "West Bengal",
             "country": "India"
         });
-    const handleInput = (event) => {
+    const handlebyInput = (event) => {
         const { name, value } = event.target;
         setInstituteDetail((prev) => {
             return { ...prev, [name]: value };
@@ -21,7 +21,7 @@ const InstituteRegister = () => {
     <div className="row">
         <div className="col-md-12 mb-4">
             <div className="form-outline w-100">
-                <input type="text" className="form-control form-control-lg" name="instituteName" value={InstituteDetail.instituteName} onChange={handleInput}/>
+                <input type="text" className="form-control form-control-lg" name="instituteName" value={InstituteDetail.instituteName} onChange={handlebyInput}/>
                 <label className="form-label">Institute Name</label>
             </div>
         </div>
@@ -29,13 +29,13 @@ const InstituteRegister = () => {
     <div className="row">
         <div className="col-md-6 mb-4">
             <div className="form-outline">
-                <input type="text" className="form-control form-control-lg" name="location" value={InstituteDetail.location} onChange={handleInput}/>
+                <input type="text" className="form-control form-control-lg" name="location" value={InstituteDetail.location} onChange={handlebyInput}/>
                 <label className="form-label">Location</label>
             </div>
         </div>
         <div className="col-md-6 mb-4">
             <div className="form-outline">
-                <input type="number" className="form-control form-control-lg" name="postalCode" value={InstituteDetail.postalCode} onChange={handleInput}/>
+                <input type="number" className="form-control form-control-lg" name="postalCode" value={InstituteDetail.postalCode} onChange={handlebyInput}/>
                 <label className="form-label">Postal Code</label>
             </div>
         </div>
@@ -43,14 +43,14 @@ const InstituteRegister = () => {
     <div className="row">
         <div className="col-md-6 mb-4">
             <div className="form-outline">
-                <input type="text" className="form-control form-control-lg" name="state" value={InstituteDetail.state} onChange={handleInput}/>
+                <input type="text" className="form-control form-control-lg" name="state" value={InstituteDetail.state} onChange={handlebyInput}/>
                 <label className="form-label">State</label>
             </div>
         </div>
         <div className="col-md-6 mb-4">
 
             <div className="form-outline">
-                <input type="text" className="form-control form-control-lg" name="country" value={InstituteDetail.country} onChange={handleInput}/>
+                <input type="text" className="form-control form-control-lg" name="country" value={InstituteDetail.country} onChange={handlebyInput}/>
                 <label className="form-label">Country</label>
             </div>
         </div>

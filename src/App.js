@@ -23,6 +23,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.js";
 import './App.css';
 
+/// this only for testing purposes
+import TestCode from './Layouts/Header/TestCode';
+import Register from './Pages/User/Register';
+
 function App() {
   return (
     <div className="App">
@@ -33,7 +37,8 @@ function App() {
             <Route path='service' element={<Service/>}/>
             <Route path='about' element={<About/>}/>
             <Route path='contact' element={<Contact/>}/>
-            <Route path='signup' element={<SignUp/>}/>
+            {/* <Route path='signup' element={<SignUp/>}/> */}
+            <Route path='register' element={<Register/>}/>
             <Route path='login' element={<Login/>}/>
           </Route>
           <Route path='/profile' element={<ProfileHeader />}>
@@ -43,6 +48,7 @@ function App() {
           
           {/* Page Not Found */}
           <Route path='*' element={ <NotFound/>} />
+          <Route path='/testcode' element={ <TestCode/>} />
         </Routes>
       </Router>
     </div>
