@@ -1,7 +1,7 @@
-import { useState, useEffect, useCallback } from "react";
-import InstituteListAPI from "../Config/InstituteAPI";
+import { useState, useEffect } from "react";
+import {InstituteListAPI} from "../Config/InstituteAPI";
 
-const InstututeList = ({ onSelectedIdChange }) => {
+const InstututeList = (props) => {
     const [Institutelist, setInstitutelist] = useState([]);
     useEffect(()=>{
         const fetchData = async () => {
@@ -15,16 +15,16 @@ const InstututeList = ({ onSelectedIdChange }) => {
             }
             fetchData();
         }, []);
-    const changeOption = useCallback((event) => {
-        const selectedId = event.target.value;
-        onSelectedIdChange(selectedId);
-        console.log(selectedId);
-    },[onSelectedIdChange]);
+    const changeOption =(event) =>{
+        const {value}=event.target;
+        // console.log(value);
+        props.handlecallback(value);
+    };
     return (
         <div className="row">
             <div className="col-12">
-                <select className="select form-control-lg w-100 select-custom-size" name="InstituteId" onSelect={changeOption}>
-                    <option>Choose option</option>
+                <select className="select form-control-lg w-100 select-custom-size" name="InstituteId"  onChange={changeOption}>
+                    <option value="0">Choose option work</option>
                     {
                         Institutelist.map((InstituteDetail) => {
                             const { id, instituteName, city } = InstituteDetail;
@@ -37,5 +37,4 @@ const InstututeList = ({ onSelectedIdChange }) => {
         </div>
     );
 }
-
 export default InstututeList;

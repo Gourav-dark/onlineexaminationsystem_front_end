@@ -11,7 +11,6 @@ import Service from './Pages/Service';
 import NotFound from './Pages/NotFound';
 // login and Regis
 import Login from './Pages/User/Login';
-import SignUp from './Pages/User/SignUp';
 
 //profile
 import ProfileHeader from './Layouts/Header/ProfileHeader';
@@ -24,7 +23,6 @@ import "bootstrap/dist/js/bootstrap.js";
 import './App.css';
 
 /// this only for testing purposes
-import TestCode from './Layouts/Header/TestCode';
 import Register from './Pages/User/Register';
 
 function App() {
@@ -38,7 +36,7 @@ function App() {
             <Route path='about' element={<About/>}/>
             <Route path='contact' element={<Contact/>}/>
             {/* <Route path='signup' element={<SignUp/>}/> */}
-            <Route path='register' element={<Register/>}/>
+            <Route path='signup' element={<Register/>}/>
             <Route path='login' element={<Login/>}/>
           </Route>
           <Route path='/profile' element={<ProfileHeader />}>
@@ -47,8 +45,7 @@ function App() {
           </Route>
           
           {/* Page Not Found */}
-          <Route path='*' element={ <NotFound/>} />
-          <Route path='/testcode' element={ <TestCode/>} />
+          {/* <Route path='*' element={ <NotFound/>} /> */}
         </Routes>
       </Router>
     </div>

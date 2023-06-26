@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import { BiLogIn } from "react-icons/bi";
 import { useState } from "react";
 import useLoginAPI from '../../Config/UserAPI';
@@ -6,6 +6,7 @@ import useLoginAPI from '../../Config/UserAPI';
 import "../../Assets/Styles/Login.css";
 
 const Login = () => {
+  const navigate=useNavigate();
   const [massage, setMassage] = useState("");
   const [alertClass, setAlertClass] = useState('');
   const [loginDetail, setLoginDetail] = useState({

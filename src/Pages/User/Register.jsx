@@ -1,6 +1,8 @@
-import { useState, useCallback } from "react";
+import { useState} from "react";
 import InPut from "../../Components/InPut";
 import InstituteList from "../../Components/InstituteList";
+import { useSignupAPI } from "../../Config/UserAPI";
+import { useRegisterInstituteApi } from "../../Config/InstituteAPI";
 
 //CSS
 import "../../Assets/Styles/Register.css";
@@ -11,7 +13,7 @@ const Register = () => {
     const [IsActive, setIsActive] = useState(false);
     //
     const[InstituteId,setInstituteId] = useState(0);
-
+    var Usertype=4;
     // Button Events
     const [StudentActive, setStudentActive] = useState("active");
     const [ExaminerActive, setExaminerActive] = useState("");
@@ -39,45 +41,93 @@ const Register = () => {
     // Handles Functions
     const handleInputChange_ID = (event) => { 
         const { name, value } = event.target;
+        // console.log(name+" "+value);
         setInstituteDetail((prev) => {
             return { ...prev, [name]: value };
         });
     }
     const handleInputChange_UD = (event) => { 
         const { name, value } = event.target;
+        // console.log(name+" "+value);
         setUserDetail((prev) => {
             return { ...prev, [name]: value };
         });
     }
-    const handleSelectedIdChange = useCallback((id) => {
-        setInstituteId(id);
-        // console.log(id);
-        // console.log(InstituteId);
-    }, []);
     const handleOnClick = (event) => {
+        const { name, value } = event.target;
+        Usertype=value;
+        // console.log(Usertype);
+        setIsActive(false);
+        setRegistration("Registration Form:");
+        switch(name){
+            case "student":
+                setExaminerActive("");
+                setStudentActive("active");
+                setInstituteUserActive("");
+                break;
+            case "examiner":
+                setExaminerActive("active");
+                setStudentActive("");
+                setInstituteUserActive("");
+
+                break;
+            case "instituteuser":
+                setExaminerActive("");
+                setStudentActive("");
+                setInstituteUserActive("active");
+                setIsActive(true);
+                setRegistration("Institute Registration Form:");
+                break;
+            default:
+        }
     }
-    const handleSubmit = (event) => {
-            event.preventDefault();
-            console.log(InstituteDetail);
+    const Callback=(id)=>{
+        setInstituteId(id);
+        // console.log("Come"+id);
+    }
+
+    const ApiInscall = useRegisterInstituteApi();
+    const signupApi = useSignupAPI();
+    const handleSubmit = async() => {
+        var forreg=true;
+        var I_id=InstituteId;
+        if(IsActive){
+            const Res=await ApiInscall(InstituteDetail);
+            if(Res.StatusCode===200){
+                I_id=Res.Id;
+                forreg=true;
+                console.log(Res.Massage);
+                // console.log(I_id);
+                // console.log(Res.Id);
+            }else{
+                console.log(Res.Massage);
+                forreg=false;
+            }
+        }
+        if(forreg){
+            const userDetail = {
+                user:UserDetail,
+                roleId: Usertype,
+                Iid:I_id
+                };
+            const Res = await signupApi(userDetail);
+            if (Res.StatusCode === 200) {
+                // console.log(Res);
+                console.log(Res.Massage);
+                //Redirect Code and massage 
+            } else {
+                console.log(Res.Massage);
+                // only Massage
+            }
+        }
     }
     return (
         <div className="Register">
-            {/* <InPut
-                label="Institute Name"
-                input={{
-                    type: "text",
-                    name: "instituteName",
-                    className: "form-control form-control-lg",
-                    placeholder: "Enter Institute Name",
-                    onChange: handleInputChange,
-                    value: InstituteDetail.instituteName
-                }}
-            /> */}
             <div className="ChangeUserTypeBtn">
                 <div className="btn-group btn-group-lg SignUp-btn-group mt-1 sticky-top" role="group" aria-label="Basic example">
-                    <button className={`btn btn-outline-light px-md-5 px-sm-4 ${StudentActive}`} name="UserType" onClick={handleOnClick} value="4">Student</button>
-                    <button className={`btn btn-outline-light px-md-5 px-sm-4 ${ExaminerActive}`} name="UserType" onClick={handleOnClick} value="3">Examiner</button>
-                    <button className={`btn btn-outline-light px-md-5 px-sm-4 ${InstituteUserActive}`} name="UserType" onClick={handleOnClick} value="2">Institute User</button>
+                    <button className={`btn btn-outline-light px-md-5 px-sm-4 ${StudentActive}`} name="student" onClick={handleOnClick} value="4">Student</button>
+                    <button className={`btn btn-outline-light px-md-5 px-sm-4 ${ExaminerActive}`} name="examiner" onClick={handleOnClick} value="3">Examiner</button>
+                    <button className={`btn btn-outline-light px-md-5 px-sm-4 ${InstituteUserActive}`} name="instituteuser" onClick={handleOnClick} value="2">Institute User</button>
                 </div>
             </div>
             <section className="vh-75">
@@ -172,6 +222,7 @@ const Register = () => {
                                                 </div>
                                             </div>
                                         </div>
+                                        <h3 className="mb-4 pb-2 pb-md-0 mb-md-3">Institute Admin Form:</h3>
                                     </div>
                                     }
                                     {/* User Register */}
@@ -337,7 +388,7 @@ const Register = () => {
                                             </div>
                                     </div>
                                     {
-                                        !IsActive && <InstituteList  onSelectedIdChange={handleSelectedIdChange}/>
+                                        !IsActive && <InstituteList handlecallback={Callback}/>
                                     }
                                     <div className="mt-2 pt-2">
                                         <button className="btn btn-primary btn-lg" onClick={handleSubmit}>Submit</button>

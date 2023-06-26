@@ -1,5 +1,5 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
-import { BiLogIn} from "react-icons/bi";
+import { BiLogIn,BiUser} from "react-icons/bi";
 ///css HomeHeader css
 import "../../Assets/Styles/HomeHeader.css";
 const HomeHeader = () => {
@@ -18,8 +18,7 @@ const HomeHeader = () => {
               <NavLink className="nav-link mx-1" to="/about">About</NavLink>
               <NavLink className="nav-link mx-1" to="/contact">Contact</NavLink>
               <span className="mx-3"></span>
-              {/* <Link className="btn btn-sm btn-outline-light mx-1" to="/signup/normaluser">Sign Up</Link> */}
-              <Link className="btn btn-sm btn-outline-light mx-1" to="/signup">Sign Up</Link>
+              <Link className="btn btn-sm btn-outline-light mx-1" to="/signup">SignUp<span><BiUser/></span></Link>
               <Link className="btn btn-sm btn-outline-light mx-1" to="/login">Login<span><BiLogIn/></span></Link>
             </div>
           </div>
