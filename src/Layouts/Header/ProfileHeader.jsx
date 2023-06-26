@@ -1,52 +1,36 @@
-import { NavLink, Outlet,Link } from "react-router-dom";
-import "../../Assets/Styles/Profile.css";
+import { Link } from "react-router-dom";
+import "../../Assets/Styles/ProfileHeader.css"
+import {BiMenu,BiLogOut,BiCog} from "react-icons/bi";
 
-export default function ProfileHeader() {
+//image
+import defaultimg from "../../Pages/User/ProfileImages/user.png";
+const ProfileHeader = () => {
   return (
-    <div className="container">
-        <nav>
-        <ul>
-            <li><a href="#" class="logo">
-            <img src="/logo.jpg" alt=""/>
-            <span class="nav-item">DashBoard</span>
-            </a></li>
-            <li><a href="#">
-            <i class="fas fa-home"></i>
-            <span class="nav-item">Home</span>
-            </a></li>
-            <li><a href="">
-            <i class="fas fa-user"></i>
-            <span class="nav-item">Profile</span>
-            </a></li>
-            <li><a href="">
-            <i class="fas fa-wallet"></i>
-            <span class="nav-item">Wallet</span>
-            </a></li>
-            <li><a href="">
-            <i class="fas fa-chart-bar"></i>
-            <span class="nav-item">Analytics</span>
-            </a></li>
-            <li><a href="">
-            <i class="fas fa-tasks"></i>
-            <span class="nav-item">Tasks</span>
-            </a></li>
-            <li><a href="">
-            <i class="fas fa-cog"></i>
-            <span class="nav-item">Settings</span>
-            </a></li>
-            <li><a href="">
-            <i class="fas fa-question-circle"></i>
-            <span class="nav-item">Help</span>
-            </a></li>
-            <li><a href="" class="logout">
-            <i class="fas fa-sign-out-alt"></i>
-            <span class="nav-item">Log out</span>
-            </a></li>
-            </ul>
-        </nav>
-        <section className="main">
-            <Outlet/>
-        </section>
+    <div className="container-fluid g-0 profile-Header">
+      {/* Top Nav Bar */}
+      <nav className="navbar sticky-top navbar-expand navbar-dark bg-dark px-2 d-flex justify-content-between" data-bs-theme="dark">
+        <div className="side-nav-button p-1 me-3 text-light">
+          <BiMenu/>
+        </div>
+        {/* online Examination System logo */}
+        <Link to="/profile" className="navbar-brand px-4 fs-6 initialism">Online Examination System</Link>
+        {/* Top Nav Bar button */}
+        <div className="profile-logo dropstart me-4">
+          <button className="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown">
+            <img src={defaultimg} className="rounded-circle p-1 bg-light me-2" alt="" style={{height:"1.3rem"}} />
+            UserName
+          </button>
+          <ul className="dropdown-menu dropdown-menu-dark">
+            <li><Link to="" className="dropdown-item d-flex align-items-center gap-2"><BiCog/>Setting</Link></li>
+            <li><Link to="" className="dropdown-item d-flex align-items-center gap-2"><BiLogOut/>Log Out</Link></li>
+          </ul>
+        </div>
+      </nav>
+      <main>
+        {/* Side Nav Bar */}
+      </main>
     </div>
   );
 }
+export default ProfileHeader
+
