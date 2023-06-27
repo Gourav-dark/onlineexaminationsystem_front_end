@@ -6,9 +6,6 @@ svg{
     width: 1rem;
     height: 1rem;
 }
-.profile-Header nav{
-    height: 100%;
-}
 .profile-Header nav .side-nav-button{
     display: flex;
     justify-content: center;
@@ -18,4 +15,39 @@ svg{
 .profile-Header nav .side-nav-button:hover{
     background-color: rgba(255,255,255,0.2);
     border-radius: 15%;
+}
+.profile-Header main .Side-navbar{
+    height: calc(100vh - 56px);
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    background-color: rgba(34,34,34,1);
+    border-top: 1px solid white;
+    transition: width .50s;
+}
+.Side-navbar ul{
+    list-style: none;
+}
+.Side-navbar ul li a{
+    text-decoration: none;
+    color: white;
+    margin: 2px;
+}
+.Side-navbar ul li svg{
+    height: 1.5rem;
+    width: 1.5rem;
+    padding: 1px;
+    margin: 1px;
+}
+.Side-navbar ul li:hover{
+    background-color: rgba(255,255,255,0.3);
+    border-radius: 8px;
+}
+.navSizeline{
+    width: 3.5rem !important;
+    transition: width .50s;
+}
+.navSizeline ul li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius:15px;
 }
