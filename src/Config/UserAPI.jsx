@@ -1,14 +1,15 @@
 import API from "./Config";
-import { useCookies } from 'react-cookie';
+// import { useCookies } from 'react-cookie';
 
 const SUrl = "Users/";
 
 // 1.Login Page ---POST
 const useLoginAPI = () => {
-  const [Cookies,setCookie] = useCookies(['UserLoginDetail']);
+  // const [Cookies,setCookie] = useCookies(['UserLoginDetail']);
   const Response = {
       Massage: "Page Not Found",
-      StatusCode: 404
+      StatusCode: 404,
+      Token:""
     };
   const loginAPI = async (loginDetail) => {
     try {
@@ -17,7 +18,8 @@ const useLoginAPI = () => {
       // const { massage } = res.data;
       Response.Massage = massage;
       Response.StatusCode = res.status;
-      setCookie('AccessCode', token);
+      Response.Token = token;
+      // setCookie('AccessCode', token);
     } catch (error) {
       const { massage } = error.response.data;      
       Response.Massage = massage;

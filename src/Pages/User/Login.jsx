@@ -1,11 +1,21 @@
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import { BiLogIn } from "react-icons/bi";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import useLoginAPI from '../../Config/UserAPI';
+import { AuthContext } from "../../Config/AuthProvider";
 
 import "../../Assets/Styles/Login.css";
+import { useEffect } from 'react';
 
 const Login = () => {
+  //Access access
+  const { login, isAuthenticated } = useContext(AuthContext);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/profile');
+    }
+  });
   const [massage, setMassage] = useState("");
   const [alertClass, setAlertClass] = useState('');
   const [loginDetail, setLoginDetail] = useState({
@@ -26,9 +36,13 @@ const Login = () => {
       setMassage(response.Massage);
     if (response.StatusCode === 200) {
       setAlertClass("alert-success show");
+      login(response.Token);
+
+      navigate('/profile');
       //Redireact Code for profile
     } else {
       setAlertClass("alert-danger show");
+      window.location.reload();
     }
   };
   const HideButton=()=>{

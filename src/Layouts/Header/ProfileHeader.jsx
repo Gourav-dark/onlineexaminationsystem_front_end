@@ -1,11 +1,24 @@
-import { NavLink,Link, Outlet } from "react-router-dom";
+import { NavLink,Link, Outlet,useNavigate } from "react-router-dom";
 import "../../Assets/Styles/ProfileHeader.css"
-import {BiMenu,BiLogOut,BiCog,BiUser} from "react-icons/bi";
+import { BiMenu, BiLogOut, BiCog, BiUser } from "react-icons/bi";
+import { useState,useContext } from "react";
+import { AuthContext } from '../../Config/AuthProvider';
+import JWTDecoder from "../../Config/JWTDecoder";
 
 //image
 import defaultimg from "../../Pages/User/profileImages/user.png";
-import { useState } from "react";
+import { useEffect } from "react";
 const ProfileHeader = () => {
+  const Navigate = useNavigate();
+  const { isAuthenticated,token } = useContext(AuthContext);
+  useEffect(() => { 
+    if (!isAuthenticated) {
+      Navigate("/login");
+    } else {
+      const user = JWTDecoder(token);
+      console.log(user);
+    }
+  })
   var [Ismenu,setIsmenu]=useState(true);
   const [classforside,setclassforside]=useState("");
   const profil_nav_list=[
