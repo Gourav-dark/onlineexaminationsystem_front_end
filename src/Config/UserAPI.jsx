@@ -58,17 +58,25 @@ export { useSignupAPI };
 const useFindUserApI=()=>{
     const Response = {
       userdetail:{},
-      Massage: "Page Not Found",
+      Massage: "",
       StatusCode: 404
   };
-  const FindUserApi=async(id)=>{
-    const res=await API.get()
+  const FindUserApi=async(data)=>{
     try{
-
+      const res=await API.get(`${SUrl}UserFind/${data.id}`,{
+          headers: {
+            'Authorization': `Bearer ${data.Token}`
+          }
+      });
+      Response.userdetail=res.data;
+      Response.StatusCode=res.status;
     }catch(error){
-
+      Response.Massage = error.response.data;
+      Response.StatusCode = error.response.status;
+      console.log(error);
     }
-    return res;
+    return Response;
   }
   return FindUserApi;
 }
+export {useFindUserApI};
