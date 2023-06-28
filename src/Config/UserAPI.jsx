@@ -54,3 +54,21 @@ const useSignupAPI = () => {
   return SignupAPI;
 }
 export { useSignupAPI };
+
+const useFindUserApI=()=>{
+    const Response = {
+      userdetail:{},
+      Massage: "Page Not Found",
+      StatusCode: 404
+  };
+  const FindUserApi=async(id)=>{
+    const res=await API.get()
+    try{
+
+    }catch(error){
+
+    }
+    return res;
+  }
+  return FindUserApi;
+}

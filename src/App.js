@@ -31,25 +31,25 @@ function App() {
     <div className="App">
       <Router>
         <AuthProvider>
-        <Routes>
-            <Route path="/" element={<HomeHeader />}>
-              <Route index element={ <Home/>}/>
-              <Route path='service' element={<Service/>}/>
-              <Route path='about' element={<About/>}/>
-              <Route path='contact' element={<Contact/>}/>
-              {/* <Route path='signup' element={<SignUp/>}/> */}
-              <Route path='signup' element={<Register/>}/>
-              <Route path='login' element={<Login/>}/>
-          </Route>
-          <Route path='/profile' element={<ProfileHeader />}>
-            <Route index element={<Profile />} />
-            <Route path='setting' element={ <Setting/>}/>
-          </Route>
-          
-          {/* Page Not Found */}
-          <Route path='*' element={ <NotFound/>} />
+          <Routes>
+              <Route path="/" element={<HomeHeader />}>
+                <Route index element={ <Home/>}/>
+                <Route path='service' element={<Service/>}/>
+                <Route path='about' element={<About/>}/>
+                <Route path='contact' element={<Contact/>}/>
+                {/* <Route path='signup' element={<SignUp/>}/> */}
+                <Route path='signup' element={<Register/>}/>
+                <Route path='login' element={<Login/>}/>
+            </Route>
+            <Route path='/profile' element={<ProfileHeader />}>
+              <Route index element={<Profile />} />
+              <Route path='setting' element={ <Setting/>}/>
+            </Route>
+            
+            {/* Page Not Found */}
+            <Route path='*' element={ <NotFound/>} />
           </Routes>
-          </AuthProvider>
+        </AuthProvider>
       </Router>
     </div>
   );

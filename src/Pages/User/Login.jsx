@@ -42,7 +42,7 @@ const Login = () => {
       //Redireact Code for profile
     } else {
       setAlertClass("alert-danger show");
-      window.location.reload();
+      // window.location.reload();
     }
   };
   const HideButton=()=>{
