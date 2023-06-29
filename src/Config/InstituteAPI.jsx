@@ -31,7 +31,7 @@ const useRegisterInstituteApi = () => {
             Response.Massage = res.data.massage;
             Response.Id = res.data.id;
             Response.StatusCode = res.status;
-            console.log(res);
+            // console.log(res);
         } catch (error) {
             Response.StatusCode = error.response.status;
             Response.Massage = error.response.data;
@@ -41,3 +41,25 @@ const useRegisterInstituteApi = () => {
     return RegisterInstituteApi;
 }
 export { useRegisterInstituteApi };
+
+const useFindInstituteApi =() => {
+    const Response = {
+        instituteDetail: {},
+        Massage:'',
+        StatusCode: 404
+    };
+    const FindInstituteApi = async (Id)=>{
+        try {
+            const res = await API.get(`${SUrl}Find/${Id}`);
+            Response.instituteDetail = res.data;
+            Response.StatusCode = res.status;
+            // console.log(res.data);
+        } catch (error) {
+            Response.StatusCode = error.response.status;
+            Response.Massage = error.response.data;
+        }
+        return Response;
+    }
+    return FindInstituteApi;
+}
+export {useFindInstituteApi};

@@ -89,7 +89,10 @@ const ProfileHeader = () => {
           <ul className="nav-list text-white mt-3 ps-0">
             {listItems}
             <li className="nav-list-item ps-0 d-flex align-items-center mt-4">
-              <button className="btn btn-outline-light w-100" onClick={logout}><BiLogOut/><span className="ms-1">Log Out</span></button>
+              <button className="btn btn-outline-light w-100 ps-2" onClick={logout}>
+                <BiLogOut />
+                {Ismenu && <span className="m-0 p-0">Log Out</span>}
+              </button>
             </li>
           </ul>
         </nav>

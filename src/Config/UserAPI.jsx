@@ -61,7 +61,8 @@ const useFindUserApI=()=>{
       Massage: "",
       StatusCode: 404
   };
-  const FindUserApi=async(data)=>{
+  const FindUserApi = async (data) => {
+    // console.log(data);
     try{
       const res=await API.get(`${SUrl}UserFind/${data.id}`,{
           headers: {
@@ -69,7 +70,8 @@ const useFindUserApI=()=>{
           }
       });
       Response.userdetail=res.data;
-      Response.StatusCode=res.status;
+      Response.StatusCode = res.status;
+      // console.log(res.data);
     }catch(error){
       Response.Massage = error.response.data;
       Response.StatusCode = error.response.status;
