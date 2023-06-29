@@ -1,8 +1,17 @@
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet,useNavigate } from "react-router-dom";
 import { BiLogIn,BiUser} from "react-icons/bi";
+import { AuthContext } from "../../Config/AuthProvider";
 ///css HomeHeader css
 import "../../Assets/Styles/HomeHeader.css";
+import { useContext,useEffect } from "react";
 const HomeHeader = () => {
+  const Navigate = useNavigate();
+  const { isAuthenticated } = useContext(AuthContext);
+  useEffect(() => {
+    if (isAuthenticated) {
+      Navigate("/profile");
+    }
+  });
   return (
     <>
       <nav className="navbar sticky-top bg-dark navbar-expand-md" data-bs-theme="dark" style={{ zIndex:"1035" }}>

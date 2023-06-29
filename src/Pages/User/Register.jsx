@@ -8,6 +8,11 @@ import { useRegisterInstituteApi } from "../../Config/InstituteAPI";
 import "../../Assets/Styles/Register.css";
 
 const Register = () => {
+    //Message shower
+    const [classname,setclassname]=useState("");
+    const [show,setshow]=useState(false);
+    const [Message ,setMessage]=useState("");
+
     const [Registration, setRegistration] = useState("Registration Form:");
     //Institute List or Register 
     const [IsActive, setIsActive] = useState(false);
@@ -20,23 +25,23 @@ const Register = () => {
     const [InstituteUserActive, setInstituteUserActive] = useState("");
     // Institute registration Details
     const [InstituteDetail, setInstituteDetail] = useState({
-      instituteName: "Game over",
-      location: "VIP Road",
-      city: "Kolkata",
-      postalCode: "700052",
-      state: "West Bengal",
-      country: "India"
+      instituteName: "",
+      location: "",
+      city: "",
+      postalCode: "",
+      state: "",
+      country: ""
     });
     //User registration details
     const [UserDetail, setUserDetail] = useState({
-        fname: "Student",
-        lname: "User",
-        gender: "F",
-        dob: "1998-11-11",
-        email: "abcdefg@gmail.com",
-        phoneNumber: "8562713396",
-        password: "12345",
-        confirmPassword: "12345"
+        fname: "",
+        lname: "",
+        gender: "",
+        dob: "",
+        email: "",
+        phoneNumber: "",
+        password: "",
+        confirmPassword: ""
     });
     // Handles Functions
     const handleInputChange_ID = (event) => { 
@@ -93,14 +98,19 @@ const Register = () => {
         var I_id=InstituteId;
         if(IsActive){
             const Res=await ApiInscall(InstituteDetail);
+            setMessage(Res.Message);
             if(Res.StatusCode===200){
                 I_id=Res.Id;
                 forreg=true;
-                console.log(Res.Massage);
+                setshow(!show);
+                setclassname("alert-success");
+                // console.log(Res.Message);
                 // console.log(I_id);
                 // console.log(Res.Id);
             }else{
-                console.log(Res.Massage);
+                // console.log(Res.Message);
+                setshow(!show);
+                setclassname("alert-danger");
                 forreg=false;
             }
         }
@@ -111,15 +121,24 @@ const Register = () => {
                 Iid:I_id
                 };
             const Res = await signupApi(userDetail);
+            setMessage(Res.Message);
             if (Res.StatusCode === 200) {
                 // console.log(Res);
-                console.log(Res.Massage);
-                //Redirect Code and massage 
+                setshow(!show);
+                setclassname("alert-success");
+                setMessage(Res.Message+" Please visit Login Page.");
+                // console.log(Res.Message);
+                //Redirect Code and Message 
             } else {
-                console.log(Res.Massage);
-                // only Massage
+                setshow(!show);
+                setclassname("alert-danger");
+                // console.log(Res.Message);
+                // only Message
             }
         }
+    }
+    const closebtn=()=>{
+        setshow(!show);
     }
     return (
         <div className="Register">
@@ -390,8 +409,8 @@ const Register = () => {
                                     {
                                         !IsActive && <InstituteList handlecallback={Callback}/>
                                     }
-                                    <div className="mt-2 pt-2">
-                                        <button className="btn btn-primary btn-lg" onClick={handleSubmit}>Submit</button>
+                                    <div className="mt-2 pt-2 d-flex justify-content-center">
+                                        <button className="btn btn-primary btn-lg px-4" onClick={handleSubmit}>Submit</button>
                                     </div>
                                 </div>
                             </div>
@@ -399,6 +418,12 @@ const Register = () => {
                     </div>
                 </div>
             </section>
+            {show && 
+            <div class={`alert d-flex justify-content-between w-25 position-absolute top-50 start-50 translate-middle ${classname}`} role="alert">
+                {Message}
+                <button type="button" class="btn-close" onClick={closebtn}></button>
+            </div>
+            }
         </div>
     );
 }

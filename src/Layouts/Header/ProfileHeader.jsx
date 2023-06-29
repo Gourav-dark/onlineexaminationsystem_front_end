@@ -3,8 +3,8 @@ import "../../Assets/Styles/ProfileHeader.css"
 import { useState,useContext } from "react";
 import { AuthContext } from '../../Config/AuthProvider';
 //All Icon
-import { BiMenu, BiLogOut, BiCog, BiUser, BiMenuAltLeft } from "react-icons/bi";
-import { AiFillBank } from "react-icons/ai";
+import { BiMenu, BiLogOut, BiCog, BiUser, BiMenuAltLeft,BiBookOpen } from "react-icons/bi";
+import { AiFillBank,AiOutlineLaptop } from "react-icons/ai";
 //image
 // import image from "../../Pages/User/profileImages/user.png";
 
@@ -16,7 +16,7 @@ const ProfileHeader = () => {
     if (!isAuthenticated) {
       Navigate("/login");
     }
-  })
+  });
   var [Ismenu,setIsmenu]=useState(true);
   const [classforside,setclassforside]=useState("");
   const profil_nav_list=[
@@ -35,6 +35,30 @@ const ProfileHeader = () => {
     {
       id:3,
       Name:"Institute",
+      icon: <AiFillBank/>,
+      url:"/profile"
+    },
+    {
+      id:4,
+      Name:"Courses",
+      icon: <AiOutlineLaptop/>,
+      url:"/profile"
+    },
+    {
+      id:5,
+      Name:"Subjects",
+      icon: <BiBookOpen/>,
+      url:"/profile"
+    },
+    {
+      id:6,
+      Name:"Results",
+      icon: <AiFillBank/>,
+      url:"/profile"
+    },
+    {
+      id:7,
+      Name:"Question",
       icon: <AiFillBank/>,
       url:"/profile"
     }
@@ -85,7 +109,7 @@ const ProfileHeader = () => {
       </nav>
       <main className="row p-0 m-0">
         {/* Side Nav Bar */}
-        <nav className={`Side-navbar col-3 col-lg-2 col-md-2 col-sm-3 p-1 ${classforside}`}>
+        <nav className={`Side-navbar col-3 col-lg-2 col-md-2 col-sm-3 p-1 vh-100 ${classforside}`}>
           <ul className="nav-list text-white mt-3 ps-0">
             {listItems}
             <li className="nav-list-item ps-0 d-flex align-items-center mt-4">

@@ -5,22 +5,17 @@ import useLoginAPI from '../../Config/UserAPI';
 import { AuthContext } from "../../Config/AuthProvider";
 
 import "../../Assets/Styles/Login.css";
-import { useEffect } from 'react';
 
 const Login = () => {
   //Access access
-  const { login, isAuthenticated } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate('/profile');
-    }
-  });
-  const [massage, setMassage] = useState("");
-  const [alertClass, setAlertClass] = useState('');
+  const [classname,setclassname]=useState("");
+  const [Message, setMessage] = useState("");
+  const [show,setshow]=useState(false);
   const [loginDetail, setLoginDetail] = useState({
-    Email: "admin@gmail.com",
-    Password: "Admin@123"
+    Email: "student@gmail.com",
+    Password: "12345"
   });
 
   const handleInput = (event) => {
@@ -33,20 +28,22 @@ const Login = () => {
   const loginAPI = useLoginAPI();
   const handleSubmit = async () => {
     const response = await loginAPI(loginDetail);
-      setMassage(response.Massage);
+      setMessage(response.Message);
     if (response.StatusCode === 200) {
-      setAlertClass("alert-success show");
+      setshow(!show);
+      setclassname("alert-success");
       login(response.Token);
 
       navigate('/profile');
       //Redireact Code for profile
     } else {
-      setAlertClass("alert-danger show");
+        setshow(!show);
+        setclassname("alert-danger");
       // window.location.reload();
     }
   };
-  const HideButton=()=>{
-    setAlertClass('d-none');
+  const closebtn=()=>{
+    setshow(!show);
   }
   return (
     <div className='Login'>
@@ -86,10 +83,12 @@ const Login = () => {
           </div>
         </div>
       </section>
-      <div className={`alert alert-dismissible alert-Login position-absolute top-50 start-50 translate-middle fade ${alertClass}`} role="alert">
-        <strong className='mx-3'>{massage}</strong> 
-        <button type="button" className="btn-close" onClick={HideButton}></button>
-      </div>
+      {show && 
+        <div class={`alert d-flex justify-content-between w-25 position-absolute top-50 start-50 translate-middle ${classname}`} role="alert">
+            {Message}
+            <button type="button" class="btn-close" onClick={closebtn}></button>
+        </div>
+      }
     </div>
   );
 };

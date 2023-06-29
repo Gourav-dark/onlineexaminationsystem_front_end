@@ -20,80 +20,77 @@ export default function Profile() {
         setshowuser(res.userdetail);
         if (inst.StatusCode === 200) {
           setShowinstitute(inst.instituteDetail);
-          console.log(inst);
+          // console.log(inst.instituteDetail);
         } else {
-          console.log(inst);
+          console.log(inst.Massage);
         }
       }
       else{
-        console.log(res);
+        console.log(res.Massage);
       }
     }
     if (Object.keys(showuser).length === 0 || Object.keys(showinstitute) === 0) {
       func();
     }
-  }, [data]);
-  const showdata = () => {
-    console.log(showinstitute)
-  }
+  });
   return (
     <div className="profile-container">
-      <div className="row bg-light m-2 rounded-3">
-          <h3 className="bg-dark text-light rounded-1 my-2 p-2 w-100">Profile Details</h3>
-            <div className="col-5 ms-4">
-              <h5>First Name</h5>
-              <h5>Last Name</h5>
-              <h5>Email</h5>
-              <h5>Date of Birth</h5>
-              <h5>Gender</h5>
-              <h5>Phone Number</h5>
-              <h5>Status</h5>
-              <h5></h5>
+      <div className="row bg-light m-2 m-md-0 rounded-3 border border-dark">
+          <h4 className="bg-dark text-light rounded-1 my-2 p-2 w-100">Profile Details</h4>
+            <div className="col-3 ms-4">
+              <h6>First Name</h6>
+              <h6>Last Name</h6>
+              <h6>Email</h6>
+              <h6>Date of Birth</h6>
+              <h6>Gender</h6>
+              <h6>Phone Number</h6>
+              <h6>Status</h6>
+              <h6></h6>
             </div>
             <div className="col-1">
-              <h5>:</h5>
-              <h5>:</h5>
-              <h5>:</h5>
-              <h5>:</h5>
-              <h5>:</h5>
-              <h5>:</h5>
-              <h5>:</h5>
+              <h6>:</h6>
+              <h6>:</h6>
+              <h6>:</h6>
+              <h6>:</h6>
+              <h6>:</h6>
+              <h6>:</h6>
+              <h6>:</h6>
             </div>
-            <div className="col-5">
-              <h5>{ showuser.fname}</h5>
-              <h5>{ showuser.lname}</h5>
-              <h5>{ showuser.email}</h5>
-              <h5>{ showuser.dob}</h5>
-              <h5>{ showuser.gender}</h5>
-              <h5>{ showuser.phoneNumber}</h5>
-              <h5>{ showuser.status ? "Active" : "Inactive"}</h5>
+            <div className="col-7">
+              <h6>{ showuser.fname}</h6>
+              <h6>{ showuser.lname}</h6>
+              <h6>{ showuser.email}</h6>
+              <h6>{ showuser.dob}</h6>
+              <h6>{ showuser.gender}</h6>
+              <h6>{ showuser.phoneNumber}</h6>
+              <h6>{ showuser.status ? "Active" : "Inactive"}</h6>
             </div>
       </div>
-      <div className="row bg-light m-2 rounded-3 institute-info">
-            <h3 className="bg-dark text-light rounded-1 my-2 p-2 w-100">Institute Information</h3>
-          <div className="col-5">
-            <h5>Institute Name</h5>
-            <h5>Location</h5>
-            <h5>City</h5>
-            <h5>Postal Code</h5>
-            <h5>State</h5>
-            <h5>Country</h5>
+      <div className="row bg-light m-2 m-md-0 rounded-3 institute-info border border-dark">
+            <h4 className="bg-dark text-light rounded-1 my-2 p-2 w-100">Institute Information</h4>
+          <div className="col-3 ms-4">
+            <h6>Institute Name</h6>
+            <h6>Location</h6>
+            <h6>City</h6>
+            <h6>Postal Code</h6>
+            <h6>State</h6>
+            <h6>Country</h6>
           </div>
           <div className="col-1">
-          <h5>:</h5>
-          <h5>:</h5>
-          <h5>:</h5>
-          <h5>:</h5>
-          <h5>:</h5>
-          <h5>:</h5>
+          <h6>:</h6>
+          <h6>:</h6>
+          <h6>:</h6>
+          <h6>:</h6>
+          <h6>:</h6>
+          <h6>:</h6>
           </div>
-          <div className="col-5">
-            <h5>{showinstitute.instituteName}</h5>
-            <h5>{showinstitute.location}</h5>
-            <h5>{showinstitute.city}</h5>
-            <h5>{showinstitute.postalCode}</h5>
-            <h5>{showinstitute.state}</h5>
-            <h5>{showinstitute.country}</h5>
+          <div className="col-7">
+            <h6>{showinstitute.instituteName}</h6>
+            <h6>{showinstitute.location}</h6>
+            <h6>{showinstitute.city}</h6>
+            <h6>{showinstitute.postalCode}</h6>
+            <h6>{showinstitute.state}</h6>
+            <h6>{showinstitute.country}</h6>
         </div>
       </div>
     </div>

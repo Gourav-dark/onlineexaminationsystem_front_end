@@ -17,7 +17,6 @@ svg{
     border-radius: 15%;
 }
 .profile-Header main .Side-navbar{
-    height: calc(100vh - 56px);
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
     background-color: rgba(34,34,34,1);
     border-top: 1px solid white;

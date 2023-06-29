@@ -6,7 +6,7 @@ const SUrl="InstituteDetails/";
 const InstituteListAPI=async()=>{
     const Response = {
         Institutelist:[],
-        StatusCode: 404
+        StatusCode: 400
     };
     try {
         const res = await API.get(`${SUrl}InstituteList`);
@@ -22,19 +22,19 @@ export {InstituteListAPI};
 const useRegisterInstituteApi = () => {
     const Response = {
         Id:0,
-        Massage:'No Registration',
-        StatusCode: 200
+        Message:'No Registration',
+        StatusCode: 400
     };
     const RegisterInstituteApi = async (instituteDetail) => {
         try {
             const res = await API.post(`${SUrl}RegisterInstitute`,instituteDetail);
-            Response.Massage = res.data.massage;
+            Response.Message = res.data.message;
             Response.Id = res.data.id;
             Response.StatusCode = res.status;
             // console.log(res);
         } catch (error) {
             Response.StatusCode = error.response.status;
-            Response.Massage = error.response.data;
+            Response.Message = error.response.data;
         }
         return Response;
     }
@@ -45,8 +45,8 @@ export { useRegisterInstituteApi };
 const useFindInstituteApi =() => {
     const Response = {
         instituteDetail: {},
-        Massage:'',
-        StatusCode: 404
+        Message:'',
+        StatusCode: 400
     };
     const FindInstituteApi = async (Id)=>{
         try {
@@ -56,7 +56,7 @@ const useFindInstituteApi =() => {
             // console.log(res.data);
         } catch (error) {
             Response.StatusCode = error.response.status;
-            Response.Massage = error.response.data;
+            Response.Message = error.response.data;
         }
         return Response;
     }
