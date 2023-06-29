@@ -419,9 +419,9 @@ const Register = () => {
                 </div>
             </section>
             {show && 
-            <div class={`alert d-flex justify-content-between w-25 position-absolute top-50 start-50 translate-middle ${classname}`} role="alert">
+            <div className={`alert d-flex justify-content-between w-25 position-absolute top-50 start-50 translate-middle ${classname}`} role="alert">
                 {Message}
-                <button type="button" class="btn-close" onClick={closebtn}></button>
+                <button type="button" className="btn-close" onClick={closebtn}></button>
             </div>
             }
         </div>

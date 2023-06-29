@@ -2,13 +2,17 @@ import { useState,useContext,useEffect } from "react";
 import { AuthContext } from '../../Config/AuthProvider';
 import InPut from "../../Components/InPut";
 import { BiEdit } from "react-icons/bi";
-import { useFindUserApI,useUpdateAPI } from "../../Config/UserAPI";
+import { useFindUserApI, useUpdateAPI } from "../../Config/UserAPI";
+import { useParams } from "react-router-dom";
 export default function Setting() {
+    //params
+    const { userId } = useParams();
+
     const [classname,setclassname]=useState("");
     const [show,setshow]=useState(false);
-    const [Message ,setMessage]=useState("");
-
-    const { token,user } = useContext(AuthContext);
+    const [Message, setMessage] = useState("");
+    
+    const { token } = useContext(AuthContext);
     const [showuser, setshowuser] = useState({});
     const [UserDetail, setUserDetail] = useState({
         fname: "",
@@ -21,7 +25,7 @@ export default function Setting() {
         confirmPassword: ""
     });
     const data={
-        id:user.UserId,
+        id:userId,
         Token:token
       }
     const apiusercall = useFindUserApI();
@@ -53,7 +57,7 @@ export default function Setting() {
     const updatecall=useUpdateAPI();
     const UpdateButton=async()=>{
         const useup={
-            Id:user.UserId,
+            Id:userId,
             Token:token,
             user:UserDetail
         };
@@ -73,9 +77,10 @@ export default function Setting() {
         setshow(!show);
     }
   return (
-    <div className="text-light mt-4 mx-2">
-        <div className="row">
-                <div className="col-md-6 mb-4">
+      <div className="text-light mt-4 mx-2">
+          <h5 className="bg-dark rounded-1 my-1 p-2 w-100">Update Profile Details</h5>
+        <div className="row mt-3">
+                <div className="col-md-6 mb-2">
                     <div className="form-outline">
                         <InPut
                             label="First Name"
@@ -90,7 +95,7 @@ export default function Setting() {
                             }}/>
                     </div>
                 </div>
-                <div className="col-md-6 mb-4">
+                <div className="col-md-6 mb-2">
 
                     <div className="form-outline">
                         <InPut
@@ -109,7 +114,7 @@ export default function Setting() {
             </div>
 
             <div className="row">
-                <div className="col-md-6 mb-4">
+                <div className="col-md-6 mb-2">
                         <InPut
                         label="Birthday"
                         labelclass="ms-2 form-label"
@@ -121,7 +126,7 @@ export default function Setting() {
                             value: UserDetail.dob
                         }}/>
                 </div>
-                <div className="col-md-6 mb-4">
+                <div className="col-md-6 mb-2">
                     <h6 className="mb-2 pb-1">Gender: </h6>
                     <div className="form-check form-check-inline">                                                        
                             <InPut
@@ -163,7 +168,7 @@ export default function Setting() {
                 </div>
             </div>
             <div className="row">
-                <div className="col-md-6 mb-4 pb-2">
+                <div className="col-md-6 mb-2 pb-2">
                     <div className="form-outline">
                             <InPut
                             label="Email"
@@ -179,7 +184,7 @@ export default function Setting() {
                     </div>
 
                 </div>
-                <div className="col-md-6 mb-4 pb-2">
+                <div className="col-md-6 mb-2 pb-2">
 
                     <div className="form-outline">
                             <InPut
@@ -198,7 +203,7 @@ export default function Setting() {
                 </div>
             </div>
             <div className="row">
-                <div className="col-md-6 mb-4 pb-2">
+                <div className="col-md-6 mb-2 pb-2">
 
                     <div className="form-outline">
                         <InPut
@@ -215,8 +220,7 @@ export default function Setting() {
                     </div>
 
                 </div>
-                <div className="col-md-6 mb-4 pb-2">
-
+                <div className="col-md-6 mb-0 pb-2">
                     <div className="form-outline">
                         <InPut
                             label="New Password"
@@ -232,15 +236,15 @@ export default function Setting() {
                     </div>
                 </div>
             </div>
-            <div className="d-flex justify-content-end">
-                <div className="bg-dark w-auto rounded-2">
-                    <button className="btn btn-outline-light px-3 w-100 btn-lg" onClick={UpdateButton}><BiEdit/>Update Profile</button>
+            <div className="mt-0 mb-3 d-flex justify-content-end w-100">
+                <div className="bg-dark rounded-2 mt-0">
+                    <button className="btn btn-outline-light px-3 w-100" onClick={UpdateButton}><BiEdit/>Update Profile</button>
                 </div>
             </div>
             {show && 
-            <div class={`alert d-flex justify-content-between w-25 position-absolute top-50 start-50 translate-middle ${classname}`} role="alert">
+            <div className={`alert d-flex justify-content-between position-absolute top-50 start-50 translate-middle ${classname}`} role="alert">
                 {Message}
-                <button type="button" class="btn-close" onClick={closebtn}></button>
+                <button type="button" className="btn-close" onClick={closebtn}></button>
             </div>
             }
     </div>

@@ -36,7 +36,7 @@ export default function Profile() {
   return (
     <div className="profile-container">
       <div className="row bg-light m-2 m-md-0 rounded-3 border border-dark">
-          <h4 className="bg-dark text-light rounded-1 my-2 p-2 w-100">Profile Details</h4>
+          <h5 className="bg-dark text-light rounded-1 my-2 p-2 w-100">Profile Details</h5>
             <div className="col-3 ms-4">
               <h6>First Name</h6>
               <h6>Last Name</h6>
@@ -45,7 +45,6 @@ export default function Profile() {
               <h6>Gender</h6>
               <h6>Phone Number</h6>
               <h6>Status</h6>
-              <h6></h6>
             </div>
             <div className="col-1">
               <h6>:</h6>
@@ -67,7 +66,7 @@ export default function Profile() {
             </div>
       </div>
       <div className="row bg-light m-2 m-md-0 rounded-3 institute-info border border-dark">
-            <h4 className="bg-dark text-light rounded-1 my-2 p-2 w-100">Institute Information</h4>
+            <h5 className="bg-dark text-light rounded-1 my-2 p-2 w-100">Institute Information</h5>
           <div className="col-3 ms-4">
             <h6>Institute Name</h6>
             <h6>Location</h6>

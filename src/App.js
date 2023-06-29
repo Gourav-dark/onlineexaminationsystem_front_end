@@ -25,6 +25,7 @@ import './App.css';
 /// this only for testing purposes
 import Register from './Pages/User/Register';
 import { AuthProvider } from './Config/AuthProvider';
+import InstituteUpdate from './Pages/User/InstituteUpdate';
 
 function App() {
   return (
@@ -43,7 +44,8 @@ function App() {
             </Route>
             <Route path='/profile' element={<ProfileHeader />}>
               <Route index element={<Profile />} />
-              <Route path='setting' element={ <Setting/>}/>
+              <Route path='setting/:userId' element={ <Setting/>}/>
+              <Route path='institute/:Iid' element={ <InstituteUpdate/>}/>
             </Route>
             
             {/* Page Not Found */}

@@ -3,8 +3,8 @@ import "../../Assets/Styles/ProfileHeader.css"
 import { useState,useContext } from "react";
 import { AuthContext } from '../../Config/AuthProvider';
 //All Icon
-import { BiMenu, BiLogOut, BiCog, BiUser, BiMenuAltLeft,BiBookOpen } from "react-icons/bi";
-import { AiFillBank,AiOutlineLaptop } from "react-icons/ai";
+import { BiMenu, BiLogOut, BiCog, BiUser, BiMenuAltLeft,BiBookOpen,BiPencil } from "react-icons/bi";
+import { AiFillBank,AiOutlineLaptop,AiOutlineFund,AiFillQuestionCircle } from "react-icons/ai";
 //image
 // import image from "../../Pages/User/profileImages/user.png";
 
@@ -30,13 +30,13 @@ const ProfileHeader = () => {
       id:2,
       Name:"Setting",
       icon: <BiCog/>,
-      url:"setting"
+      url:`setting/${user.UserId}`
     },
     {
       id:3,
       Name:"Institute",
       icon: <AiFillBank/>,
-      url:"/profile"
+      url:`institute/${user.Iid}`
     },
     {
       id:4,
@@ -52,14 +52,20 @@ const ProfileHeader = () => {
     },
     {
       id:6,
-      Name:"Results",
-      icon: <AiFillBank/>,
+      Name:"Exams",
+      icon: <BiPencil/>,
       url:"/profile"
     },
     {
       id:7,
       Name:"Question",
-      icon: <AiFillBank/>,
+      icon: <AiFillQuestionCircle/>,
+      url:"/profile"
+    },
+    {
+      id:8,
+      Name:"Results",
+      icon: <AiOutlineFund/>,
       url:"/profile"
     }
   ];
@@ -88,7 +94,7 @@ const ProfileHeader = () => {
           {Ismenu?<BiMenu/>:<BiMenuAltLeft/>}
         </div>
         {/* online Examination System logo */}
-        <Link to="/profile" className="navbar-brand px-4 fs-6 initialism">Online Examination System</Link>
+        <Link to="/profile" className="navbar-brand fs-6 initialism">Online Examination System</Link>
         {/* Top Nav Bar button */}
         {/* <div className="profile-logo dropstart me-4">
           <button className="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown">
@@ -105,14 +111,15 @@ const ProfileHeader = () => {
             {/* <img src={require(`../../Pages/User${user.Image}`)} className="border rounded-circle p-1 me-2" alt="" style={{height:"1.3rem"}} /> */}
             {user.Email}
           </button>
+          {/* <h6>User Type: { user.Role}</h6> */}
         </div>
       </nav>
       <main className="row p-0 m-0">
         {/* Side Nav Bar */}
-        <nav className={`Side-navbar col-3 col-lg-2 col-md-2 col-sm-3 p-1 vh-100 ${classforside}`}>
+        <nav className={`Side-navbar col-3 col-lg-2 col-md-2 col-sm-3 p-1 rounded-end ${classforside}`}>
           <ul className="nav-list text-white mt-3 ps-0">
             {listItems}
-            <li className="nav-list-item ps-0 d-flex align-items-center mt-4">
+            <li className="nav-list-item ps-0 d-flex align-items-center mt-5">
               <button className="btn btn-outline-light w-100 ps-2" onClick={logout}>
                 <BiLogOut />
                 {Ismenu && <span className="m-0 p-0">Log Out</span>}
