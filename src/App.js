@@ -26,6 +26,7 @@ import './App.css';
 import Register from './Pages/User/Register';
 import { AuthProvider } from './Config/AuthProvider';
 import InstituteUpdate from './Pages/User/InstituteUpdate';
+import Course from './Pages/User/Course';
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
               <Route index element={<Profile />} />
               <Route path='setting/:userId' element={ <Setting/>}/>
               <Route path='institute/:Iid' element={ <InstituteUpdate/>}/>
+              <Route path='course/:Iid' element={ <Course/>}/>
             </Route>
             
             {/* Page Not Found */}

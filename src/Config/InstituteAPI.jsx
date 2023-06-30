@@ -63,3 +63,30 @@ const useFindInstituteApi =() => {
     return FindInstituteApi;
 }
 export {useFindInstituteApi};
+
+const useUpdateInstituteApi=()=>{
+    const Response = {
+        Message:'',
+        StatusCode: 400
+    };
+    const UpdateInstituteApi=async(data)=>{
+        console.log(data);
+        console.log(data.Institute);
+        try{
+            const res=await API.put(`${SUrl}UpdateInstitute/${data.Id}`,data.Institute,{
+                headers: {
+                    'Authorization': `Bearer ${data.Token}`
+                }
+            });
+            Response.Message = res.data;
+            Response.StatusCode = res.status;
+        }catch(error){
+            console.log(error);
+            Response.StatusCode = error.response.status;
+            Response.Message = error.response.data;
+        }
+        return Response;
+    }
+    return UpdateInstituteApi;
+}
+export {useUpdateInstituteApi};

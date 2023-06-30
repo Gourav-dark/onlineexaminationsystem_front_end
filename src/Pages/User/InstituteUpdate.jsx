@@ -4,7 +4,7 @@ import { AuthContext } from '../../Config/AuthProvider';
 import { BiEdit } from "react-icons/bi";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { useFindInstituteApi } from "../../Config/InstituteAPI";
+import { useFindInstituteApi,useUpdateInstituteApi } from "../../Config/InstituteAPI";
 const InstituteUpdate = () => {
     const { Iid } = useParams();
     //Message shower
@@ -27,7 +27,7 @@ const InstituteUpdate = () => {
         const fun=async()=>{
             const res=await callFindapi(Iid);
             if (res.StatusCode === 200) {
-                setInstituteDetail((InstituteDetail) => ({
+                setInstituteDetail(InstituteDetail => ({
                     ...InstituteDetail,
                     ...res.instituteDetail  
                 }));
@@ -48,8 +48,24 @@ const InstituteUpdate = () => {
             return { ...prev, [name]: value };
         });
     }
+    const callAPIupdate=useUpdateInstituteApi();
     const UpdateButton = async () => {
-        console.log(InstituteDetail);
+        const Data={
+            Token:token,
+            Id:Iid,
+            Institute:InstituteDetail
+        };
+        const res=await callAPIupdate(Data);
+        setMessage(res.Message);
+        if(res.StatusCode===200){
+            setshow(!show);
+            setclassname("alert-success");
+            // console.log(res);
+        }else{
+            setshow(!show);
+            setclassname("alert-danger");
+            // console.log(res);
+        }
     }
     const closebtn=()=>{
         setshow(!show);
@@ -141,7 +157,7 @@ const InstituteUpdate = () => {
             </div>
             <div className="mt-0 mb-3 d-flex justify-content-end w-100">
                 <div className="bg-dark rounded-2 mt-0">
-                    <button className="btn btn-outline-light px-3 w-100" onClick={UpdateButton}><BiEdit/>Update Profile</button>
+                    <button className="btn btn-outline-light px-3 w-100" onClick={UpdateButton}><BiEdit/>Update Institute Detail</button>
                 </div>
             </div>
             {show && 

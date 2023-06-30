@@ -42,7 +42,7 @@ const ProfileHeader = () => {
       id:4,
       Name:"Courses",
       icon: <AiOutlineLaptop/>,
-      url:"/profile"
+      url:`course/${user.Iid}`
     },
     {
       id:5,
@@ -90,28 +90,17 @@ const ProfileHeader = () => {
       {/* Top Nav Bar */}
       <nav className="navbar sticky-top navbar-expand navbar-dark bg-dark px-2 d-flex justify-content-between w-100" data-bs-theme="dark">
         <div className="side-nav-button p-1 me-3 text-light" onClick={SideNavclick}>
-          
           {Ismenu?<BiMenu/>:<BiMenuAltLeft/>}
         </div>
         {/* online Examination System logo */}
-        <Link to="/profile" className="navbar-brand fs-6 initialism">Online Examination System</Link>
+        <Link to="/profile" className="navbar-brand ms-2 fs-6 initialism">Online Examination System</Link>
         {/* Top Nav Bar button */}
-        {/* <div className="profile-logo dropstart me-4">
-          <button className="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown">
-            <img src={defaultimg} className="border rounded-circle p-1 me-2" alt="" style={{height:"1.3rem"}} />
-            UserName
-          </button>
-          <ul className="dropdown-menu dropdown-menu-dark">
-            <li><Link to="" className="dropdown-item d-flex align-items-center gap-2"><BiCog/>Setting</Link></li>
-            <li><Link to="" className="dropdown-item d-flex align-items-center gap-2"><BiLogOut/>Log Out</Link></li>
-          </ul>
-        </div> */}
-        <div className="profile-logo me-4">
+        <div className="profile-logo d-flex gap-2">
           <button className="btn btn-outline-light" onClick={()=>Navigate("/profile")}>
             {/* <img src={require(`../../Pages/User${user.Image}`)} className="border rounded-circle p-1 me-2" alt="" style={{height:"1.3rem"}} /> */}
             {user.Email}
           </button>
-          {/* <h6>User Type: { user.Role}</h6> */}
+          <h6 className="mx-2 text-light mt-2">{user.Role}</h6>
         </div>
       </nav>
       <main className="row p-0 m-0">

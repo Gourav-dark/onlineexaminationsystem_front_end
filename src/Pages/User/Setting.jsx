@@ -56,6 +56,7 @@ export default function Setting() {
     //update
     const updatecall=useUpdateAPI();
     const UpdateButton=async()=>{
+        console.log(UserDetail);
         const useup={
             Id:userId,
             Token:token,
