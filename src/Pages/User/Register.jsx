@@ -18,7 +18,7 @@ const Register = () => {
     const [IsActive, setIsActive] = useState(false);
     //
     const[InstituteId,setInstituteId] = useState(0);
-    var Usertype=4;
+    var [Usertype,setUsertype]=useState(4);
     // Button Events
     const [StudentActive, setStudentActive] = useState("active");
     const [ExaminerActive, setExaminerActive] = useState("");
@@ -60,7 +60,7 @@ const Register = () => {
     }
     const handleOnClick = (event) => {
         const { name, value } = event.target;
-        Usertype=value;
+        setUsertype(value);
         // console.log(Usertype);
         setIsActive(false);
         setRegistration("Registration Form:");
@@ -114,13 +114,14 @@ const Register = () => {
                 forreg=false;
             }
         }
-        if(forreg){
-            const userDetail = {
+        if (forreg) {
+            const userData = {
                 user:UserDetail,
                 roleId: Usertype,
                 Iid:I_id
-                };
-            const Res = await signupApi(userDetail);
+            };
+            console.log(userData);
+            const Res = await signupApi(userData);
             setMessage(Res.Message);
             if (Res.StatusCode === 200) {
                 // console.log(Res);
@@ -155,12 +156,12 @@ const Register = () => {
                         <div className="col-12 col-lg-9 col-xl-7">
                             <div className="card shadow-2-strong card-registration  bg-dark text-white" style={{borderradius: "15px"}}>
                                 <div className="card-body p-4 p-md-4">
-                                    <h3 className="mb-4 pb-2 pb-md-0 mb-md-3">{Registration}</h3>
+                                    <h3 className="mb-2 pb-2 pb-md-0 mb-md-3">{Registration}</h3>
                                     {/* Institute Details Register */}
                                     { IsActive &&
                                     <div>
                                         <div className="row">
-                                            <div className="col-md-12 mb-4">
+                                            <div className="col-md-12 mb-2">
                                                 <div className="form-outline w-100">
                                                     <InPut
                                                         label="Institute Name"
@@ -177,7 +178,7 @@ const Register = () => {
                                             </div>
                                         </div>
                                         <div className="row">
-                                            <div className="col-md-6 mb-4">
+                                            <div className="col-md-6 mb-2">
                                                 <div className="form-outline">
                                                     <InPut
                                                         label="Location"
@@ -192,7 +193,7 @@ const Register = () => {
                                                         }}/>
                                                 </div>
                                             </div>
-                                            <div className="col-md-6 mb-4">
+                                            <div className="col-md-6 mb-2">
                                                 <div className="form-outline">
                                                     <InPut
                                                         label="Postal Code"
@@ -209,7 +210,7 @@ const Register = () => {
                                             </div>
                                         </div>
                                         <div className="row">
-                                            <div className="col-md-6 mb-4">
+                                            <div className="col-md-6 mb-2">
                                                 <div className="form-outline">
                                                     <InPut
                                                         label="State"
@@ -224,30 +225,47 @@ const Register = () => {
                                                         }}/>
                                                 </div>
                                             </div>
-                                            <div className="col-md-6 mb-4">
-
+                                            <div className="col-md-6 mb-2">
                                                 <div className="form-outline">
                                                     <InPut
-                                                        label="Country"
-                                                        labelclass="form-label"    
+                                                        label="City Name"
+                                                        labelclass="form-label"
                                                         input={{
+                                                            type: "text",
+                                                            name: "city",
+                                                            className: "form-control form-control-lg",
+                                                            placeholder: "City",
+                                                            onChange: handleInputChange_ID,
+                                                            value: InstituteDetail.city
+                                                        }}/>
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-md-6 mb-2">
+
+                                                    <div className="form-outline">
+                                                        <InPut
+                                                            label="Country"
+                                                            labelclass="form-label"    
+                                                            input={{
                                                             type: "text",
                                                             name: "country",
                                                             className: "form-control form-control-lg",
                                                             placeholder: "Country",
                                                             onChange: handleInputChange_ID,
                                                             value: InstituteDetail.country
-                                                        }}/>
+                                                            }}/>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </div>    
                                         </div>
-                                        <h3 className="mb-4 pb-2 pb-md-0 mb-md-3">Institute Admin Form:</h3>
+                                        <h3 className="mb-2 pb-2 pb-md-0 mb-md-3">Institute Admin Form:</h3>
                                     </div>
                                     }
                                     {/* User Register */}
                                     <div>
                                         <div className="row">
-                                                <div className="col-md-6 mb-4">
+                                                <div className="col-md-6 mb-2">
                                                     <div className="form-outline">
                                                         <InPut
                                                             label="First Name"
@@ -262,7 +280,7 @@ const Register = () => {
                                                             }}/>
                                                     </div>
                                                 </div>
-                                                <div className="col-md-6 mb-4">
+                                                <div className="col-md-6 mb-2">
 
                                                     <div className="form-outline">
                                                         <InPut
@@ -281,7 +299,7 @@ const Register = () => {
                                             </div>
 
                                             <div className="row">
-                                                <div className="col-md-6 mb-4">
+                                                <div className="col-md-6 mb-2">
                                                         <InPut
                                                         label="Birthday"
                                                         labelclass="form-label"
@@ -293,7 +311,7 @@ const Register = () => {
                                                             value: UserDetail.dob
                                                         }}/>
                                                 </div>
-                                                <div className="col-md-6 mb-4">
+                                                <div className="col-md-6 mb-2">
                                                     <h6 className="mb-2 pb-1">Gender: </h6>
                                                     <div className="form-check form-check-inline">                                                        
                                                             <InPut
@@ -335,7 +353,7 @@ const Register = () => {
                                                 </div>
                                             </div>
                                             <div className="row">
-                                                <div className="col-md-6 mb-4 pb-2">
+                                                <div className="col-md-6 mb-2 pb-2">
                                                     <div className="form-outline">
                                                             <InPut
                                                             label="Email"
@@ -351,7 +369,7 @@ const Register = () => {
                                                     </div>
 
                                                 </div>
-                                                <div className="col-md-6 mb-4 pb-2">
+                                                <div className="col-md-6 mb-2 pb-2">
 
                                                     <div className="form-outline">
                                                             <InPut
@@ -370,7 +388,7 @@ const Register = () => {
                                                 </div>
                                             </div>
                                             <div className="row">
-                                                <div className="col-md-6 mb-4 pb-2">
+                                                <div className="col-md-6 mb-2 pb-2">
 
                                                     <div className="form-outline">
                                                         <InPut
@@ -387,7 +405,7 @@ const Register = () => {
                                                     </div>
 
                                                 </div>
-                                                <div className="col-md-6 mb-4 pb-2">
+                                                <div className="col-md-6 mb-2 pb-2">
 
                                                     <div className="form-outline">
                                                         <InPut
@@ -409,7 +427,7 @@ const Register = () => {
                                     {
                                         !IsActive && <InstituteList handlecallback={Callback}/>
                                     }
-                                    <div className="mt-2 pt-2 d-flex justify-content-center">
+                                    <div className="mt-0 pt-0 d-flex justify-content-center">
                                         <button className="btn btn-primary btn-lg px-4" onClick={handleSubmit}>Submit</button>
                                     </div>
                                 </div>

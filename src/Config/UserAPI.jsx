@@ -1,7 +1,7 @@
 import API from "./Config";
 // import { useCookies } from 'react-cookie';
 
-const SUrl = "Users/";
+const URL = "Users/";
 
 // 1.Login Page ---POST
 const useLoginAPI = () => {
@@ -13,7 +13,7 @@ const useLoginAPI = () => {
     };
   const loginAPI = async (loginDetail) => {
     try {
-      const res = await API.post(`${SUrl}Login`, loginDetail);
+      const res = await API.post(`${URL}Login`, loginDetail);
       const { token, message } = res.data;
       Response.Message = message;
       Response.StatusCode = res.status;
@@ -39,7 +39,7 @@ const useSignupAPI = () => {
   };
   const SignupAPI = async (signupDetail) => {
     try {
-      const res = await API.post(`${SUrl}Signup?roleId=${signupDetail.roleId}&instituteId=${signupDetail.Iid}`, signupDetail.user);
+      const res = await API.post(`${URL}Signup?roleId=${signupDetail.roleId}&instituteId=${signupDetail.Iid}`, signupDetail.user);
       const { message, userId } = res.data;
       Response.StatusCode = res.status;
       Response.userId = userId;
@@ -63,7 +63,7 @@ const useFindUserApI=()=>{
   const FindUserApi = async (data) => {
     // console.log(data);
     try{
-      const res=await API.get(`${SUrl}UserFind/${data.id}`,{
+      const res=await API.get(`${URL}UserFind/${data.id}`,{
           headers: {
             'Authorization': `Bearer ${data.Token}`
           }
@@ -89,7 +89,7 @@ const useUpdateAPI = () => {
   };
   const UpdateAPI = async (data) => {
     try {
-      const res = await API.put(`${SUrl}Update/${data.Id}`,data.user,{
+      const res = await API.put(`${URL}Update/${data.Id}`,data.user,{
         headers: {
           'Authorization': `Bearer ${data.Token}`
         }

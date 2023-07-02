@@ -8,7 +8,7 @@ const AuthContext = createContext();
 // const AuthProvider = () => {
 const AuthProvider = ({ children }) => {
   const [token, setToken] = useState('');
-  const [user,setUser]=useState({});
+  const [user, setUser] = useState({});
   // const Key="RDG_KJD_KJGFNDV-RFJ-FDNK-DNKG";
   useEffect(() => {
     const storedToken = localStorage.getItem('token');

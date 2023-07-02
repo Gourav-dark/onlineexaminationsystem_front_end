@@ -1,12 +1,8 @@
 const InPut = (props) => {
-    const handleInputChange = (event => {
-        const { name, value } = event.target;
-        props.input.onChange(name, value);
-    });
     return (
         <>
+            <label className={`${props.labelclass} mb-0`}>{props.label}</label>
             <input {...props.input} />
-            <label className={props.labelclass}>{props.label}</label>
         </>
     )
 }

@@ -1,7 +1,7 @@
 import API from "./Config";
 
 //Institute Detail URL start
-const SUrl="InstituteDetails/";
+const URL="InstituteDetails/";
 // 1.Institute Detail ---GET
 const InstituteListAPI=async()=>{
     const Response = {
@@ -9,7 +9,7 @@ const InstituteListAPI=async()=>{
         StatusCode: 400
     };
     try {
-        const res = await API.get(`${SUrl}InstituteList`);
+        const res = await API.get(`${URL}InstituteList`);
         Response.Institutelist=res.data;
         Response.StatusCode = res.status;
     } catch (error) {     
@@ -27,7 +27,7 @@ const useRegisterInstituteApi = () => {
     };
     const RegisterInstituteApi = async (instituteDetail) => {
         try {
-            const res = await API.post(`${SUrl}RegisterInstitute`,instituteDetail);
+            const res = await API.post(`${URL}RegisterInstitute`,instituteDetail);
             Response.Message = res.data.message;
             Response.Id = res.data.id;
             Response.StatusCode = res.status;
@@ -50,7 +50,7 @@ const useFindInstituteApi =() => {
     };
     const FindInstituteApi = async (Id)=>{
         try {
-            const res = await API.get(`${SUrl}Find/${Id}`);
+            const res = await API.get(`${URL}Find/${Id}`);
             Response.instituteDetail = res.data;
             Response.StatusCode = res.status;
             // console.log(res.data);
@@ -70,10 +70,10 @@ const useUpdateInstituteApi=()=>{
         StatusCode: 400
     };
     const UpdateInstituteApi=async(data)=>{
-        console.log(data);
-        console.log(data.Institute);
+        // console.log(data);
+        // console.log(data.Institute);
         try{
-            const res=await API.put(`${SUrl}UpdateInstitute/${data.Id}`,data.Institute,{
+            const res=await API.put(`${URL}UpdateInstitute/${data.Id}`,data.Institute,{
                 headers: {
                     'Authorization': `Bearer ${data.Token}`
                 }

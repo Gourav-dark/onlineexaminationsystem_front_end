@@ -27,6 +27,10 @@ import Register from './Pages/User/Register';
 import { AuthProvider } from './Config/AuthProvider';
 import InstituteUpdate from './Pages/User/InstituteUpdate';
 import Course from './Pages/User/Course';
+import Subject from './Pages/User/Subject';
+import ExamList from './Components/ExamList';
+import QuestionList from './Components/QuestionList';
+import Loader from './Components/Loader';
 
 function App() {
   return (
@@ -39,7 +43,6 @@ function App() {
                 <Route path='service' element={<Service/>}/>
                 <Route path='about' element={<About/>}/>
                 <Route path='contact' element={<Contact/>}/>
-                {/* <Route path='signup' element={<SignUp/>}/> */}
                 <Route path='signup' element={<Register/>}/>
                 <Route path='login' element={<Login/>}/>
             </Route>
@@ -48,9 +51,14 @@ function App() {
               <Route path='setting/:userId' element={ <Setting/>}/>
               <Route path='institute/:Iid' element={ <InstituteUpdate/>}/>
               <Route path='course/:Iid' element={ <Course/>}/>
+              <Route path='subject/:Sid' element={<Subject />}>
+                <Route path='examlist' element={ <ExamList/>}/>
+                <Route path='questionlist' element={ <QuestionList/>}/>
+              </Route>
             </Route>
             
             {/* Page Not Found */}
+            <Route path="loader" element={<Loader/> }/>
             <Route path='*' element={ <NotFound/>} />
           </Routes>
         </AuthProvider>

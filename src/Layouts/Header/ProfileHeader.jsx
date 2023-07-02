@@ -4,7 +4,7 @@ import { useState,useContext } from "react";
 import { AuthContext } from '../../Config/AuthProvider';
 //All Icon
 import { BiMenu, BiLogOut, BiCog, BiUser, BiMenuAltLeft,BiBookOpen,BiPencil } from "react-icons/bi";
-import { AiFillBank,AiOutlineLaptop,AiOutlineFund,AiFillQuestionCircle } from "react-icons/ai";
+import { AiFillBank,AiOutlineFund,AiFillQuestionCircle } from "react-icons/ai";
 //image
 // import image from "../../Pages/User/profileImages/user.png";
 
@@ -41,26 +41,26 @@ const ProfileHeader = () => {
     {
       id:4,
       Name:"Courses",
-      icon: <AiOutlineLaptop/>,
+      icon: <BiBookOpen/>,
       url:`course/${user.Iid}`
     },
-    {
-      id:5,
-      Name:"Subjects",
-      icon: <BiBookOpen/>,
-      url:"/profile"
-    },
+    // {
+    //   id:5,
+    //   Name:"Subjects",
+    //   icon: <BiBookOpen/>,
+    //   url:"/profile"
+    // },
     {
       id:6,
       Name:"Exams",
       icon: <BiPencil/>,
-      url:"/profile"
+      url:"examlist"
     },
     {
       id:7,
       Name:"Question",
       icon: <AiFillQuestionCircle/>,
-      url:"/profile"
+      url:"question"
     },
     {
       id:8,
@@ -105,7 +105,7 @@ const ProfileHeader = () => {
       </nav>
       <main className="row p-0 m-0">
         {/* Side Nav Bar */}
-        <nav className={`Side-navbar col-3 col-lg-2 col-md-2 col-sm-3 p-1 rounded-end ${classforside}`}>
+        <nav className={`Side-navbar h-75 col-3 col-lg-2 col-md-2 col-sm-3 p-1 rounded-end ${classforside}`}>
           <ul className="nav-list text-white mt-3 ps-0">
             {listItems}
             <li className="nav-list-item ps-0 d-flex align-items-center mt-5">

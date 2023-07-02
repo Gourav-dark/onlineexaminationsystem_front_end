@@ -4,17 +4,17 @@ import {InstituteListAPI} from "../Config/InstituteAPI";
 const InstututeList = (props) => {
     const [Institutelist, setInstitutelist] = useState([]);
     useEffect(()=>{
-        const fetchData = async () => {
-            const Res = await InstituteListAPI();
-            if (Res.StatusCode === 200) {
-                setInstitutelist(Res.Institutelist);
-            }
-            else {
-                console.log("Data not Fatched");
-            }
-            }
             fetchData();
-        }, []);
+    }, []);
+    const fetchData = async () => {
+        const Res = await InstituteListAPI();
+        if (Res.StatusCode === 200) {
+            setInstitutelist(Res.Institutelist);
+        }
+        else {
+            console.log("Data not Fatched");
+        }
+    };
     const changeOption =(event) =>{
         const {value}=event.target;
         // console.log(value);

@@ -24,23 +24,22 @@ const InstituteUpdate = () => {
     });
     const callFindapi = useFindInstituteApi();
     useEffect(()=>{
-        const fun=async()=>{
-            const res=await callFindapi(Iid);
-            if (res.StatusCode === 200) {
-                setInstituteDetail(InstituteDetail => ({
-                    ...InstituteDetail,
-                    ...res.instituteDetail  
-                }));
-            }
-            else{
-                console.log(res.Message);
-            }
-        }
-        // if(Object.keys(InstituteDetail).length === 0) {
         if(InstituteDetail.instituteName==="") {
            fun();
         }
     });
+    const fun=async()=>{
+        const res=await callFindapi(Iid);
+        if (res.StatusCode === 200) {
+            setInstituteDetail(InstituteDetail => ({
+                ...InstituteDetail,
+                ...res.instituteDetail  
+            }));
+        }
+        else{
+            console.log(res.Message);
+        }
+    }
     const handleInputChange_ID = (event) => { 
         const { name, value } = event.target;
         // console.log(name+" "+value);
@@ -124,6 +123,22 @@ const InstituteUpdate = () => {
             </div>
             <div className="row">
                 <div className="col-md-6 mb-2">
+
+                    <div className="form-outline">
+                        <InPut
+                            label="City Name"
+                            labelclass="form-label"    
+                            input={{
+                                type: "text",
+                                name: "city",
+                                className: "form-control form-control-lg",
+                                placeholder: "City Name",
+                                onChange: handleInputChange_ID,
+                                value: InstituteDetail.city
+                            }}/>
+                    </div>
+                </div>
+                <div className="col-md-6 mb-2">
                     <div className="form-outline">
                         <InPut
                             label="State"
@@ -138,6 +153,9 @@ const InstituteUpdate = () => {
                             }}/>
                     </div>
                 </div>
+                
+            </div>
+            <div className="row">
                 <div className="col-md-6 mb-2">
 
                     <div className="form-outline">

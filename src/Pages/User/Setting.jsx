@@ -30,23 +30,23 @@ export default function Setting() {
       }
     const apiusercall = useFindUserApI();
     useEffect(()=>{
-        const fun=async()=>{
-            const res=await apiusercall(data);
-            if(res.StatusCode===200){
-                setshowuser(res.userdetail);
-                setUserDetail(UserDetail=>({
-                    ...UserDetail,
-                    ...res.userdetail
-                }));
-            }
-            else{
-                console.log(res.Message);
-            }
-        }
         if (Object.keys(showuser).length === 0) {
             fun();
-          }
+        }
     });
+    const fun=async()=>{
+        const res=await apiusercall(data);
+        if(res.StatusCode===200){
+            setshowuser(res.userdetail);
+            setUserDetail(UserDetail=>({
+                ...UserDetail,
+                ...res.userdetail
+            }));
+        }
+        else{
+            console.log(res.Message);
+        }
+    }
     const handleInputChange_UD = (event) => { 
     const { name, value } = event.target;
         setUserDetail((prev) => {
@@ -74,9 +74,9 @@ export default function Setting() {
             // console.log(res);
         }
     };
-    const closebtn=()=>{
+    const closebtn = () => {
         setshow(!show);
-    }
+    };
   return (
       <div className="text-light mt-4 mx-2">
           <h5 className="bg-dark rounded-1 my-1 p-2 w-100">Update Profile Details</h5>
