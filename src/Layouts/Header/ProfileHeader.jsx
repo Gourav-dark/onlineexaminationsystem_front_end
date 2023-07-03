@@ -3,8 +3,8 @@ import "../../Assets/Styles/ProfileHeader.css"
 import { useState,useContext } from "react";
 import { AuthContext } from '../../Config/AuthProvider';
 //All Icon
-import { BiMenu, BiLogOut, BiCog, BiUser, BiMenuAltLeft,BiBookOpen,BiPencil } from "react-icons/bi";
-import { AiFillBank,AiOutlineFund,AiFillQuestionCircle } from "react-icons/ai";
+import { BiMenu, BiLogOut, BiCog, BiMenuAltLeft,BiBookOpen,BiUserCircle } from "react-icons/bi";
+import { AiFillBank,AiOutlineFund,AiOutlineUsergroupAdd } from "react-icons/ai";
 //image
 // import image from "../../Pages/User/profileImages/user.png";
 
@@ -19,11 +19,13 @@ const ProfileHeader = () => {
   });
   var [Ismenu,setIsmenu]=useState(true);
   const [classforside,setclassforside]=useState("");
-  const profil_nav_list=[
+
+  //Filter Navbar list base on The User Type
+  const profile_nav_list=[
     {
       id:1,
       Name:"Profile",
-      icon: <BiUser/>,
+      icon: <BiUserCircle/>,
       url:"/profile"
     },
     {
@@ -40,41 +42,59 @@ const ProfileHeader = () => {
     },
     {
       id:4,
+      Name:"User List",
+      icon: <AiOutlineUsergroupAdd/>,
+      url:`userlist/${user.UserId}`
+    },
+    {
+      id:5,
       Name:"Courses",
       icon: <BiBookOpen/>,
       url:`course/${user.Iid}`
     },
-    // {
-    //   id:5,
-    //   Name:"Subjects",
-    //   icon: <BiBookOpen/>,
-    //   url:"/profile"
-    // },
     {
       id:6,
-      Name:"Exams",
-      icon: <BiPencil/>,
-      url:"examlist"
+      Name:"Enroll Course",
+      icon: <BiBookOpen/>,
+      url:`enrollcourse/${user.UserId}/${user.Iid}`
     },
     {
       id:7,
-      Name:"Question",
-      icon: <AiFillQuestionCircle/>,
-      url:"question"
-    },
-    {
-      id:8,
       Name:"Results",
       icon: <AiOutlineFund/>,
-      url:"/profile"
+      url:`result/${user.UserId}`
     }
+    // {
+    //   id:6,
+    //   Name:"Exams",
+    //   icon: <BiPencil/>,
+    //   url:"examlist"
+    // },
+    // {
+    //   id:7,
+    //   Name:"Question",
+    //   icon: <AiFillQuestionCircle/>,
+    //   url:"question"
+    // },
   ];
-  const listItems=profil_nav_list.map((items)=>
+  const [ShowList,setShowList]=useState([]);
+  if(user.Role==="Admin"){
+    setShowList([1,2,3,4,5,7]);
+  }else if(user.Role==="InstituteUser"){
+    setShowList([1,2,3,5,7]);
+  }else if(user.Role==="Examiner"){
+    setShowList([1,2,5,7]);
+  }else if(user.Role==="Student"){
+    setShowList([1,2,6,7]);
+  }
+  const listItems=profile_nav_list.map((items)=>{
+
   <li key={items.id} className="nav-list-item mx-1 ps-0 py-1 d-flex align-items-center">
       <NavLink to={items.url}>{items.icon}
       {Ismenu &&<span className="ms-1">{items.Name}</span>}
       </NavLink>
   </li>
+  }
   );
   const SideNavclick=()=>{
     var isactive=!Ismenu;

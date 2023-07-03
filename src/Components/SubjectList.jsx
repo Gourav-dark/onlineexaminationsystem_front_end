@@ -10,7 +10,7 @@ const SubjectList = ({Cid}) => {
     const callListApi= useISubjectbyCourseId();
     useEffect(() => {
         fun();
-    }, [Cid, showSubjectlist, Message]);
+    }, [showSubjectlist]);
     const fun = async () => {
         const data = {
             Cid: Cid,

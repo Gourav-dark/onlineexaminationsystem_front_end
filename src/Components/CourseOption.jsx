@@ -22,7 +22,11 @@ export const CourseOption = ({ show, handleClose, btnName, Cid, Iid }) => {
         token
       }
       const res = await addapicall(data);
-      if (res.StatusCode === 200) { 
+      if (res.StatusCode === 200) {
+        setCourse({
+          courseName: "",
+          departmentName: ""
+        });
         handleClose();
       }
     } else {

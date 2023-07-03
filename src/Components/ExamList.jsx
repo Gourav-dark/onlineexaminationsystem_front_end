@@ -14,7 +14,7 @@ const ExamList = () => {
   const callApiList = useExamListBySid();
   useEffect(() => {
     fun();
-  }, [Sid,showModel]);
+  }, [Sid,showModel,showExamsList]);
   const fun = async () => {
     const data = {
       Sid, token

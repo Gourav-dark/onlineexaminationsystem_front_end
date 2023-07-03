@@ -1,7 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
 import JWTDecoder from './JWTDecoder';
-// import ProfileHeader from '../Layouts/Header/ProfileHeader';
-// import Login from "../Pages/User/Login";
 
 const AuthContext = createContext();
 

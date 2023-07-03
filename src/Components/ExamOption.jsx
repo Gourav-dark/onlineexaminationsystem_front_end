@@ -7,12 +7,12 @@ import { useAddExamBySid } from "../Config/ExamAPI";
 const ExamOption = ({ show, handleClose, btnName, Sid, Exid }) => {
     const { token } = useContext(AuthContext);
     const [ExamDetail, setExamDetail] = useState({
-        "examName": "Sem-2",
-        "date": "2023-12-08",
-        "time": "13:30",
-        "duration": 20,
-        "noOfQuestion": 20,
-        "totalMark": 40
+        "examName": "",
+        "date": "",
+        "time": "",
+        "duration": 0,
+        "noOfQuestion": 0,
+        "totalMark": 0
     });
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -26,6 +26,14 @@ const ExamOption = ({ show, handleClose, btnName, Sid, Exid }) => {
             }
             const res = await callAddApi(data);
             if (res.StatusCode === 200) {
+                setExamDetail({
+                  "examName": "",
+                  "date": "",
+                  "time": "",
+                  "duration": 0,
+                  "noOfQuestion": 0,
+                  "totalMark": 0
+                })
                 handleClose();
             }
         }else {

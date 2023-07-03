@@ -27,6 +27,13 @@ const QuestionOption = ({ Eid, Sid, btnName, handleClose, show }) => {
         };
         const res = await addApicall(data);
         if (res.StatusCode===200) {
+          setQuestion({
+            questionTitle: "",
+            option_A: "",
+            option_B: "",
+            option_C: "",
+            option_D: ""
+          })
           handleClose();
         } else {
           console.log(res);

@@ -14,8 +14,8 @@ const Login = () => {
   const [Message, setMessage] = useState("");
   const [show,setshow]=useState(false);
   const [loginDetail, setLoginDetail] = useState({
-    Email: "aman@gmail.com",
-    Password: "12345"
+    Email: "",
+    Password: ""
   });
 
   const handleInput = (event) => {

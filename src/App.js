@@ -31,6 +31,9 @@ import Subject from './Pages/User/Subject';
 import ExamList from './Components/ExamList';
 import QuestionList from './Components/QuestionList';
 import Loader from './Components/Loader';
+import Result from './Pages/User/Result';
+import EnrollCourse from './Pages/User/EnrollCourse';
+import UserList from './Pages/User/UserList';
 
 function App() {
   return (
@@ -50,11 +53,14 @@ function App() {
               <Route index element={<Profile />} />
               <Route path='setting/:userId' element={ <Setting/>}/>
               <Route path='institute/:Iid' element={ <InstituteUpdate/>}/>
+              <Route path='userlist/:userId' element={<UserList/>}/>
               <Route path='course/:Iid' element={ <Course/>}/>
               <Route path='subject/:Sid' element={<Subject />}>
                 <Route path='examlist' element={ <ExamList/>}/>
                 <Route path='questionlist' element={ <QuestionList/>}/>
               </Route>
+              <Route path='enrollcourse/:userId/:Iid' element={<EnrollCourse/>}/>
+              <Route path='result/:Id' element={<Result/>}/>
             </Route>
             
             {/* Page Not Found */}

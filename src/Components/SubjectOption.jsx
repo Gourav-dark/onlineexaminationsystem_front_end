@@ -45,6 +45,7 @@ const SubjectOption = ({ show, handleClose, btnName, Cid, Sid }) => {
           const res = await calladdAPi(data);
           if (res.StatusCode === 200) {
             // console.log(res);
+            setSubject({subjectName:"",subjectCode:""});
             handleClose();
           }
         }else {

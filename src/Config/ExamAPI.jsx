@@ -29,13 +29,14 @@ export const useExamListBySid = () => {
     }
     return configApi;
 };
+//2. Add Exam Detail 
 export const useAddExamBySid = () => {
     const Response = {
         Message: "Page Not Found",
         StatusCode: 404
     };
     const configApi = async (data) => {
-        console.log(data);
+        // console.log(data);
         try {
             const res = await API.post(`${URL}AddExamDetail/${data.Sid}`,data.ExamDetail, {
                 headers: {
@@ -43,6 +44,32 @@ export const useAddExamBySid = () => {
                 }
             });
             Response.Data=res.data;
+            Response.StatusCode = res.status;
+            // console.log(res.data);
+        }catch(error){
+            Response.Message = error.response.data;
+            Response.StatusCode = error.response.status;
+            console.log(error);
+        }
+        return Response;
+    }
+    return configApi;
+};
+//3. Detail by Exam Id
+export const useDeleteExam = () => {
+    const Response = {
+        Message: "Page Not Found",
+        StatusCode: 404
+    };
+    const configApi = async (data) => {
+        // console.log(data);
+        try {
+            const res = await API.delete(`${URL}DeleteExamDetail/${data.Exid}`, {
+                headers: {
+                    'Authorization': `Bearer ${data.token}`
+                }
+            });
+            Response.Message=res.data;
             Response.StatusCode = res.status;
             // console.log(res.data);
         }catch(error){

@@ -8,7 +8,7 @@ const SubjectItem = ({ item }) => {
     setshowModel(!showModel);
   }
   return (
-    <div className="row mx-3 bg-secondary border border-dark border-2 border-top-0 text-light">
+    <div className="row mx-3 bg-secondary border border-dark border-1 border-top-0 text-light">
         <div className="col-3 ms-1 mt-1">{item.subjectName}</div>
         <div className="col-3 mt-1">{item.subjectCode}</div>
         <div className="col-5 d-flex justify-content-center gap-2">
