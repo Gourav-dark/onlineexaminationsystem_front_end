@@ -1,13 +1,15 @@
-import { useState,useEffect } from "react";
-import { useICourseListApi } from "../../Config/CourseAPI";
+import { useState,useEffect,useContext } from "react";
+import { useDeleteCourseApi, useICourseListApi } from "../../Config/CourseAPI";
 import { useParams } from "react-router-dom";
 
 import {AiOutlinePlusCircle} from "react-icons/ai";
 import { CourseOption } from "../../Components/CourseOption";
 import { CourseItem } from "../../Components/CourseItem";
+import { AuthContext } from "../../Config/AuthProvider";
 
 const Course = () => {
   const { Iid } = useParams();
+  const { token } = useContext(AuthContext);
   //Message
   const [classname,setclassname]=useState("");
   const [show,setshow]=useState(false);
@@ -37,6 +39,27 @@ const Course = () => {
   const IsCourseModel = () => {
     setShowModal(!showModal);
   };
+
+  //Delete Course Detail
+  const callDelteApi=useDeleteCourseApi();
+  const handleDelete = async (Cid) => {
+    const data = {
+      Cid,token
+    }
+    const res = await callDelteApi(data); {
+      if (res.StatusCode === 200) {
+        setMessage(res.Message);
+        setclassname("alert-success");
+        setshow(!show);
+        fun();
+      } else {
+        setMessage(res.Message);
+        setclassname("alert-danger");
+        setshow(!show);
+        console.log(res.Message);
+      }
+    }
+  }
   return (
     <div className="Course">
       <div className="mt-1 mx-2 bg-dark text-light d-flex align-items-center justify-content-between rounded-3">
@@ -49,14 +72,13 @@ const Course = () => {
           <div className="col-3">Department</div>
           <div className="col-6 d-flex justify-content-center">More Options</div>
         </div>
-            {courseList.map((item) => <CourseItem key={item.id} item={item} />)}
+            {courseList.map((item) => <CourseItem key={item.id} item={item} handleDelete={handleDelete} />)}
       </div>
       {/* Not Diplsay Contant */}
       <CourseOption
         show={showModal}
         handleClose={IsCourseModel}
         btnName="Add Course"
-        Cid=""
         Iid={Iid}
       />
       {show && 

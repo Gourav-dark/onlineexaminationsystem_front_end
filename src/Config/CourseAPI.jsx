@@ -27,14 +27,14 @@ export const useICourseListApi = () => {
     }
     return IcourseListApi;
 };
-// 1. Add Course4
+// 2. Add Course4
 export const useaddCourseApi = () => {
     const Response = {
         Message:'No Registration',
         StatusCode: 400
     };
     const AddApi = async (data) => {
-        console.log(data);
+        // console.log(data);
         try {
             const res = await API.post(`${URL}AddCourse/${data.Iid}`, data.Course, {
                 headers: {
@@ -52,4 +52,30 @@ export const useaddCourseApi = () => {
         return Response;
     }
     return AddApi;
+};
+// 3. Delete Course by id
+export const useDeleteCourseApi = () => {
+    const Response = {
+        Message:'No Registration',
+        StatusCode: 400
+    };
+    const ApiConfig = async (data) => {
+        console.log(data);
+        try {
+            const res = await API.delete(`${URL}Delete/${data.Cid}`,{
+                headers: {
+                    'Authorization': `Bearer ${data.token}`
+                }
+            });
+            Response.StatusCode = res.status;
+            Response.Message = res.data;
+            // console.log(res);
+        } catch (error) {
+            Response.Message = error.response.data;
+            Response.StatusCode = error.response.status;
+            console.log(error);
+        }
+        return Response;
+    }
+    return ApiConfig;
 };

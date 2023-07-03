@@ -11,58 +11,58 @@ import { AiFillBank,AiOutlineFund,AiOutlineUsergroupAdd } from "react-icons/ai";
 import { useEffect } from "react";
 const ProfileHeader = () => {
   const Navigate = useNavigate();
-  const { isAuthenticated,user,logout } = useContext(AuthContext);
+  const { isAuthenticated, user, logout } = useContext(AuthContext);
   useEffect(() => {
     if (!isAuthenticated) {
       Navigate("/login");
     }
   });
-  var [Ismenu,setIsmenu]=useState(true);
-  const [classforside,setclassforside]=useState("");
+  var [Ismenu, setIsmenu] = useState(true);
+  const [classforside, setclassforside] = useState("");
 
   //Filter Navbar list base on The User Type
-  const profile_nav_list=[
+  const profile_nav_list = [
     {
-      id:1,
-      Name:"Profile",
-      icon: <BiUserCircle/>,
-      url:"/profile"
+      id: 1,
+      Name: "Profile",
+      icon: <BiUserCircle />,
+      url: "/profile"
     },
     {
-      id:2,
-      Name:"Setting",
-      icon: <BiCog/>,
-      url:`setting/${user.UserId}`
+      id: 2,
+      Name: "Setting",
+      icon: <BiCog />,
+      url: `setting/${user.UserId}`
     },
     {
-      id:3,
-      Name:"Institute",
-      icon: <AiFillBank/>,
-      url:`institute/${user.Iid}`
+      id: 3,
+      Name: "Institutes",
+      icon: <AiFillBank />,
+      url: `institute/${user.Iid}`
     },
     {
-      id:4,
-      Name:"User List",
-      icon: <AiOutlineUsergroupAdd/>,
-      url:`userlist/${user.UserId}`
+      id: 4,
+      Name: "User List",
+      icon: <AiOutlineUsergroupAdd />,
+      url: `userlist/${user.UserId}`
     },
     {
-      id:5,
-      Name:"Courses",
-      icon: <BiBookOpen/>,
-      url:`course/${user.Iid}`
+      id: 5,
+      Name: "Courses",
+      icon: <BiBookOpen />,
+      url: `course/${user.Iid}`
     },
     {
-      id:6,
-      Name:"Enroll Course",
-      icon: <BiBookOpen/>,
-      url:`enrollcourse/${user.UserId}/${user.Iid}`
+      id: 6,
+      Name: "Enroll Course",
+      icon: <BiBookOpen />,
+      url: `enrollcourse/${user.UserId}/${user.Iid}`
     },
     {
-      id:7,
-      Name:"Results",
-      icon: <AiOutlineFund/>,
-      url:`result/${user.UserId}`
+      id: 7,
+      Name: "Results",
+      icon: <AiOutlineFund />,
+      url: `result/${user.UserId}`
     }
     // {
     //   id:6,
@@ -77,24 +77,24 @@ const ProfileHeader = () => {
     //   url:"question"
     // },
   ];
-  const [ShowList,setShowList]=useState([]);
-  if(user.Role==="Admin"){
-    setShowList([1,2,3,4,5,7]);
-  }else if(user.Role==="InstituteUser"){
-    setShowList([1,2,3,5,7]);
-  }else if(user.Role==="Examiner"){
-    setShowList([1,2,5,7]);
-  }else if(user.Role==="Student"){
-    setShowList([1,2,6,7]);
+  let ShowList = [];
+  if (user.Role === "Admin") {
+    ShowList=[1, 2, 3, 4, 5, 7];
+  } else if (user.Role === "InstituteUser") {
+    ShowList=[1, 2, 3, 5, 7];
+  } else if (user.Role === "Examiner") {
+    ShowList=[1, 2, 5, 7];
+  } else if (user.Role === "Student") {
+    ShowList=[1, 2, 6, 7];
   }
-  const listItems=profile_nav_list.map((items)=>{
-
-  <li key={items.id} className="nav-list-item mx-1 ps-0 py-1 d-flex align-items-center">
+  const listItems = profile_nav_list.filter(item=>ShowList.includes(item.id)).map((items) =>
+  {
+    return (<li key={items.id} className="nav-list-item mx-1 ps-0 py-1 d-flex align-items-center">
       <NavLink to={items.url}>{items.icon}
-      {Ismenu &&<span className="ms-1">{items.Name}</span>}
+        {Ismenu && <span className="ms-1">{items.Name}</span>}
       </NavLink>
-  </li>
-  }
+    </li>);
+    }
   );
   const SideNavclick=()=>{
     var isactive=!Ismenu;

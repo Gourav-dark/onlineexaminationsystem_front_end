@@ -15,7 +15,7 @@ export const CourseOption = ({ show, handleClose, btnName, Cid, Iid }) => {
   }
   const addapicall = useaddCourseApi();
   const handleSubmit = async () => {
-    if (Cid === "") {
+    if (Cid === undefined) {
       const data = {
         Course,
         Iid,

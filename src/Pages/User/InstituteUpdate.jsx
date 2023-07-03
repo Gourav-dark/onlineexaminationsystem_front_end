@@ -12,7 +12,7 @@ const InstituteUpdate = () => {
     const [show,setshow]=useState(false);
     const [Message, setMessage] = useState("");
 
-    const { token } = useContext(AuthContext);
+    const { token,user } = useContext(AuthContext);
     
     const [InstituteDetail, setInstituteDetail] = useState({
         instituteName: "",
@@ -69,8 +69,12 @@ const InstituteUpdate = () => {
     const closebtn=()=>{
         setshow(!show);
     }
+    //Code for list of all Institute
+    
     return (
-        <div className="InstituteUpdate text-light">
+    <>{user.Role === "Admin" ?
+        (<div>Institute List</div>):        
+        (<div className="InstituteUpdate text-light">
             <h5 className="bg-dark rounded-3 my-2 p-2 w-100">Update Institute Details</h5>
             <div className="row">
                 <div className="col-md-12 mb-2">
@@ -184,7 +188,8 @@ const InstituteUpdate = () => {
                 <button type="button" className="btn-close" onClick={closebtn}></button>
             </div>
             }
-        </div>
+        </div >)}
+    </>
     );
 }
 export default InstituteUpdate

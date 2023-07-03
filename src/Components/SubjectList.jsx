@@ -1,6 +1,6 @@
 import { useState,useEffect,useContext } from "react";
 import SubjectItem from "./SubjectItem";
-import { useISubjectbyCourseId } from "../Config/SubjectAPI";
+import { useDeleteSubjectApi, useISubjectbyCourseId } from "../Config/SubjectAPI";
 import { AuthContext } from "../Config/AuthProvider";
 const SubjectList = ({Cid}) => {
     const [Message,setMessage]=useState("");
@@ -23,6 +23,20 @@ const SubjectList = ({Cid}) => {
             setMessage(res.Message);
         }
     };
+    //Delete Subject From List
+    const callDeleteApi=useDeleteSubjectApi();
+    const handleDelete = async(Sid) => {
+        const data = {
+            Sid,token
+        }
+        const res = await callDeleteApi(data);
+        if (res.StatusCode === 200) {
+            console.log(res.Message);
+            fun();
+        } else {
+            console.log(res);
+        }
+    }
     return (
         <div className="SubjectList">
             <div className="row mx-3 mt-1 bg-secondary rounded-top-2 border-bottom border-dark border-2 py-1 text-light">
@@ -33,7 +47,7 @@ const SubjectList = ({Cid}) => {
             {
                 Object.keys(showSubjectlist).length !== 0 ?
                     showSubjectlist.map((item) =>
-                        <SubjectItem key={item.id} item={item} />)
+                        <SubjectItem key={item.id} item={item} handleDelete={handleDelete} />)
                 :
                 <div className="alert alert-danger mx-3 py-1 " role="alert">
                         {Message}

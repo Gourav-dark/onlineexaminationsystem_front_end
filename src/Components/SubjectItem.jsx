@@ -1,7 +1,7 @@
 import { useState } from "react";
 import SubjectOption from "./SubjectOption";
 import { useNavigate } from "react-router-dom";
-const SubjectItem = ({ item }) => {
+const SubjectItem = ({ item,handleDelete}) => {
   const Navigate = useNavigate();
   const [showModel, setshowModel] = useState(false);
   const handleEdit = () => {
@@ -13,7 +13,7 @@ const SubjectItem = ({ item }) => {
         <div className="col-3 mt-1">{item.subjectCode}</div>
         <div className="col-5 d-flex justify-content-center gap-2">
                 <button className='btn btn-sm btn-info my-1' onClick={handleEdit}>Edit</button>
-                <button className='btn btn-sm btn-danger my-1'>Delete</button>
+                <button className='btn btn-sm btn-danger my-1' onClick={()=>handleDelete(item.id)}>Delete</button>
                 <button className='btn btn-sm btn-success my-1' onClick={() => Navigate(`/profile/subject/${item.id}`)}>More Options</button>
         </div>
       { showModel &&

@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import ExamItem from "./ExamItem";
 import { useContext,useEffect,useState } from "react";
-import { useExamListBySid } from "../Config/ExamAPI";
+import { useExamListBySid,useDeleteExam } from "../Config/ExamAPI";
 import { AuthContext } from "../Config/AuthProvider";
 import ExamOption from "./ExamOption";
 
@@ -14,7 +14,7 @@ const ExamList = () => {
   const callApiList = useExamListBySid();
   useEffect(() => {
     fun();
-  }, [Sid,showModel,showExamsList]);
+  }, [Sid,showExamsList,showModel]);
   const fun = async () => {
     const data = {
       Sid, token
@@ -28,6 +28,20 @@ const ExamList = () => {
   }
   const showAddModel = () => {
     setshowModel(!showModel);
+  }
+  // Delete Exam from List
+  const callDelteApi=useDeleteExam();
+  const handleDelete=async(Exid)=>{
+    const data={
+      Exid,token
+    }
+    const res=await callDelteApi(data);
+    if(res.StatusCode===200){
+      console.log(res.Message);
+      fun();
+    }else{
+      console.log(res);
+    }
   }
   return (
     <div className="ExamDetail bg-light rounded-2 mt-1 py-1 mx-1">
@@ -47,7 +61,7 @@ const ExamList = () => {
       {
         Object.keys(showExamsList).length !== 0 ?
             showExamsList.map((item) =>
-                <ExamItem key={item.id} item={item} />)
+              <ExamItem key={item.id} item={item} handleDelete={handleDelete} />)
         :
         <div className="alert alert-danger mt-1 mx-2 py-0" role="alert">
                 {Message}
