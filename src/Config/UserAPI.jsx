@@ -106,3 +106,28 @@ const useUpdateAPI = () => {
   return UpdateAPI;
 }
 export {useUpdateAPI};
+
+//Use List for Amdin page
+export const useUserListApi=()=>{
+  const Response = {
+    Data:[],
+    Message: "Page Not Found",
+    StatusCode: 404
+  };
+  const ApiConfig=async(data)=>{
+    try{
+      const res=await API.get(`${URL}Userlist`,{
+        headers: {
+          'Authorization': `Bearer ${data.Token}`
+        }
+      });
+      Response.Data=res.data;
+      Response.StatusCode = res.status;
+    }catch(error){
+      Response.Message = error.response.data;
+      Response.StatusCode = error.response.status;
+    }
+    return Response;
+  }
+  return ApiConfig;
+}
