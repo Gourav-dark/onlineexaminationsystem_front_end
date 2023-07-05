@@ -79,3 +79,32 @@ export const useDeleteCourseApi = () => {
     }
     return ApiConfig;
 };
+
+//4. All Course From Admin
+
+export const useAllCourseListApi = () => {
+    const Response = {
+        courseList:[],
+        Message:'No Registration',
+        StatusCode: 400
+    };
+    const IcourseListApi = async (data) => {
+        try {
+            const res = await API.get(`${URL}AllCourseList`, {
+              headers: {
+                    'Authorization': `Bearer ${data.token}`
+                }
+          });
+            // console.log(res);
+            Response.courseList = res.data;
+            Response.StatusCode = res.status;
+            Response.Message = "";
+        } catch (error) {
+            Response.Message = error.response.data;
+            Response.StatusCode = error.response.status;
+            console.log(error);
+        }
+        return Response;
+    }
+    return IcourseListApi;
+};

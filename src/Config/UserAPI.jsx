@@ -115,13 +115,38 @@ export const useUserListApi=()=>{
     StatusCode: 404
   };
   const ApiConfig=async(data)=>{
-    try{
+    // console.log(data);
+    try {
       const res=await API.get(`${URL}Userlist`,{
+        headers: {
+          'Authorization': `Bearer ${data.token}`
+        }
+      });
+      Response.Data=res.data;
+      Response.StatusCode = res.status;
+    }catch(error){
+      Response.Message = error.response.data;
+      Response.StatusCode = error.response.status;
+    }
+    return Response;
+  }
+  return ApiConfig;
+}
+//Active or Deactive for Amdin page
+export const useUserIsActiveApi=()=>{
+  const Response = {
+    Message: "Page Not Found",
+    StatusCode: 404
+  };
+  const ApiConfig=async(data)=>{
+    // console.log(data.token);
+    try {
+      const res = await API.put(`${URL}ActivatedStatus/${data.UserId}`, {},{
         headers: {
           'Authorization': `Bearer ${data.Token}`
         }
       });
-      Response.Data=res.data;
+      Response.Message=res.data;
       Response.StatusCode = res.status;
     }catch(error){
       Response.Message = error.response.data;

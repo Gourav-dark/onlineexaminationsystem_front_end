@@ -4,8 +4,15 @@ import { AuthContext } from '../../Config/AuthProvider';
 import { BiEdit } from "react-icons/bi";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { useFindInstituteApi,useUpdateInstituteApi } from "../../Config/InstituteAPI";
-const InstituteUpdate = () => {
+import { useFindInstituteApi,useUpdateInstituteApi,InstituteListAPI } from "../../Config/InstituteAPI";
+import Loader from "../../Components/Loader";
+import InstituteItem from "../../Components/InstituteItem";
+
+const Institutes = () => {
+    //Loading
+    const [Loading, setLoading] = useState(false);
+    //Admin Institute List
+    const [InstituteList, setInstituteList] = useState([]);
     const { Iid } = useParams();
     //Message shower
     const [classname,setclassname]=useState("");
@@ -24,11 +31,17 @@ const InstituteUpdate = () => {
     });
     const callFindapi = useFindInstituteApi();
     useEffect(()=>{
-        if(InstituteDetail.instituteName==="") {
-           fun();
+        // if(InstituteDetail.instituteName==="") {
+        //    fun();
+        // } else
+        if (user.Role === "Admin" && InstituteList.length === 0) {
+            ListshowApicall();
+        } else if(InstituteDetail.city === "") {
+            fun();
         }
-    });
-    const fun=async()=>{
+    },[]);
+    const fun = async () => {
+        setLoading(true);
         const res=await callFindapi(Iid);
         if (res.StatusCode === 200) {
             setInstituteDetail(InstituteDetail => ({
@@ -39,6 +52,7 @@ const InstituteUpdate = () => {
         else{
             console.log(res.Message);
         }
+        setLoading(false);
     }
     const handleInputChange_ID = (event) => { 
         const { name, value } = event.target;
@@ -49,6 +63,7 @@ const InstituteUpdate = () => {
     }
     const callAPIupdate=useUpdateInstituteApi();
     const UpdateButton = async () => {
+        setLoading(true);
         const Data={
             Token:token,
             Id:Iid,
@@ -65,15 +80,41 @@ const InstituteUpdate = () => {
             setclassname("alert-danger");
             // console.log(res);
         }
+        setLoading(false);
     }
     const closebtn=()=>{
         setshow(!show);
     }
     //Code for list of all Institute
-    
+    const ListshowApicall = async () => {
+        setLoading(true);
+        const res = await InstituteListAPI();
+        if (res.StatusCode === 200) {
+            console.log(res);
+            setInstituteList(res.Institutelist);
+        }
+        else{
+            console.log(res.Message);
+        }
+        setLoading(false);
+    }
     return (
     <>{user.Role === "Admin" ?
-        (<div>Institute List</div>):        
+        (<div className="InstituteList">
+                <div className="bg-dark mt-2 mx-2 text-light p-2 fs-6 rounded-2">Institute List</div>
+                <div className="bg-dark row mt-2 mx-2 py-2 px-1 border border-3 border-dark rounded-top-3 text-white">
+                    <div className="col-3 d-flex justify-content-center align-items-center">Institute Name</div>
+                    <div className="col-2 d-flex justify-content-center align-items-center">Location</div>
+                    <div className="col-1 d-flex justify-content-center align-items-center">City</div>
+                    <div className="col-3 d-flex justify-content-center align-items-center">Postal Code</div>
+                    <div className="col-2 d-flex justify-content-center align-items-center">State</div>
+                    <div className="col-1 d-flex justify-content-center align-items-center">country</div>
+                </div>
+                
+                {InstituteList.map((institute,index)=>(
+                    <InstituteItem key={index} item={institute}/>
+                ))}
+        </div>):        
         (<div className="InstituteUpdate text-light">
             <h5 className="bg-dark rounded-3 my-2 p-2 w-100">Update Institute Details</h5>
             <div className="row">
@@ -189,7 +230,8 @@ const InstituteUpdate = () => {
             </div>
             }
         </div >)}
+        {Loading && <Loader />}    
     </>
     );
 }
-export default InstituteUpdate
+export default Institutes

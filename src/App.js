@@ -25,7 +25,7 @@ import './App.css';
 /// this only for testing purposes
 import Register from './Pages/User/Register';
 import { AuthProvider } from './Config/AuthProvider';
-import InstituteUpdate from './Pages/User/InstituteUpdate';
+import Institutes from './Pages/User/Institutes';
 import Course from './Pages/User/Course';
 import Subject from './Pages/User/Subject';
 import ExamList from './Components/ExamList';
@@ -52,7 +52,7 @@ function App() {
             <Route path='/profile' element={<ProfileHeader />}>
               <Route index element={<Profile />} />
               <Route path='setting/:userId' element={ <Setting/>}/>
-              <Route path='institute/:Iid' element={ <InstituteUpdate/>}/>
+              <Route path='institute/:Iid' element={ <Institutes/>}/>
               <Route path='userlist/:userId' element={<UserList/>}/>
               <Route path='course/:Iid' element={ <Course/>}/>
               <Route path='subject/:Sid' element={<Subject />}>

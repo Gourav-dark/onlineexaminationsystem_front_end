@@ -1,15 +1,19 @@
 import { useState,useEffect,useContext } from "react";
-import { useDeleteCourseApi, useICourseListApi } from "../../Config/CourseAPI";
+import { useAllCourseListApi, useDeleteCourseApi, useICourseListApi } from "../../Config/CourseAPI";
 import { useParams } from "react-router-dom";
 
 import {AiOutlinePlusCircle} from "react-icons/ai";
 import { CourseOption } from "../../Components/CourseOption";
 import { CourseItem } from "../../Components/CourseItem";
 import { AuthContext } from "../../Config/AuthProvider";
+import Loader from "../../Components/Loader";
 
 const Course = () => {
+  //Loading
+  const [Loading,setLoading] =useState(false);
+
   const { Iid } = useParams();
-  const { token } = useContext(AuthContext);
+  const { token,user } = useContext(AuthContext);
   //Message
   const [classname,setclassname]=useState("");
   const [show,setshow]=useState(false);
@@ -19,9 +23,14 @@ const Course = () => {
   const [courseList, setcouserList] = useState([]);
   const callIcourse = useICourseListApi();
   useEffect(() => {
+    if (user.Role === "Admin") {
+      AllCourseList();
+    } else {
       fun();
+    }
   }, [showModal]);
   const fun = async () => {
+    setLoading(true);
     const res = await callIcourse(Iid);
     if (res.StatusCode === 200) {
       setcouserList(res.courseList);
@@ -32,6 +41,7 @@ const Course = () => {
       console.log(res);
       setshow(!show);
     }
+    setLoading(false);
   }
   const closebtn = () => {
     setshow(!show);
@@ -43,6 +53,7 @@ const Course = () => {
   //Delete Course Detail
   const callDelteApi=useDeleteCourseApi();
   const handleDelete = async (Cid) => {
+    setLoading(true);
     const data = {
       Cid,token
     }
@@ -59,12 +70,32 @@ const Course = () => {
         console.log(res.Message);
       }
     }
+    setLoading(false);
+  }
+  ///All Course
+  const callAllApi = useAllCourseListApi();
+  const AllCourseList = async () => {
+    setLoading(true);
+    const data = {
+      token
+    }
+    const res = await callAllApi(data);
+    if (res.StatusCode === 200) {
+      setcouserList(res.courseList);
+      // console.log(res);
+    } else {
+      setMessage(res.Message);
+      setclassname("alert-danger");
+      console.log(res);
+      setshow(!show);
+    }
+    setLoading(false);
   }
   return (
     <div className="Course">
       <div className="mt-1 mx-2 bg-dark text-light d-flex align-items-center justify-content-between rounded-3">
-        <h5 className="my-auto mx-2">Institute Courses List :</h5>
-        <button className="btn btn-primary btn-sm m-1" onClick={IsCourseModel}><span className="me-1"><AiOutlinePlusCircle style={{height:"1.25rem",width:"1.25rem"}}/></span>Add Course</button>
+        <h5 className="my-auto mx-2 py-2">Institute Courses List :</h5>
+        {user.Role==="InstituteUser"&&<button className="btn btn-primary btn-sm m-1" onClick={IsCourseModel}><span className="me-1"><AiOutlinePlusCircle style={{height:"1.25rem",width:"1.25rem"}}/></span>Add Course</button>}
       </div>
       <div className="courseListclass">
         <div className="row bg-light mt-2 mx-2 rounded-top-2 py-1 border-bottom border-dark border-3">
@@ -86,7 +117,8 @@ const Course = () => {
               {Message}
               <button type="button" className="btn-close" onClick={closebtn}></button>
           </div>
-          }
+      }
+      {Loading && <Loader />}
     </div>
   );
 }
