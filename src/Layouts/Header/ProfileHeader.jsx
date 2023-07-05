@@ -81,9 +81,9 @@ const ProfileHeader = () => {
   if (user.Role === "Admin") {
     ShowList=[1, 2, 3, 4, 5, 7];
   } else if (user.Role === "InstituteUser") {
-    ShowList=[1, 2, 3, 5, 7];
+    ShowList=[1, 2, 3, 5];
   } else if (user.Role === "Examiner") {
-    ShowList=[1, 2, 5, 7];
+    ShowList=[1, 2, 5];
   } else if (user.Role === "Student") {
     ShowList=[1, 2, 6, 7];
   }

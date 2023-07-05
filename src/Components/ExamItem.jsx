@@ -1,4 +1,7 @@
-const ExamItem = ({item,handleDelete,role}) => {
+import { useNavigate } from "react-router-dom";
+
+const ExamItem = ({ item, handleDelete, role }) => {
+  const Navigate = useNavigate();
   return (
     <div className="row mx-2 border border-1 border-dark border-top-0 d-flex align-items-center text-dark">
       <div className="col-2">{item.examName}</div>
@@ -10,11 +13,11 @@ const ExamItem = ({item,handleDelete,role}) => {
       <div className="col-2 d-flex justify-content-center align-items-center gap-1">
         {
           role==="Student" ?(
-            <button className="btn btn-success btn-sm my-1">Appear</button>
+            <button className="btn btn-success btn-sm my-1" onClick={()=>Navigate(`/profile/exampage/${item.id}`)}>Appear</button>
           ):(
             <>
-              <button className="btn btn-info btn-sm my-1">Edit</button>
-              <button className="btn btn-danger btn-sm my-1 px-1" onClick={()=>handleDelete(item.id)}>Delete</button>
+              {/* <button className="btn btn-info btn-sm my-1">Edit</button> */}
+              <button className="btn btn-outline-danger btn-sm my-1 px-1" onClick={()=>handleDelete(item.id)}>Delete</button>
             </>
           )
         }

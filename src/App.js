@@ -34,6 +34,7 @@ import Loader from './Components/Loader';
 import Result from './Pages/User/Result';
 import EnrollCourse from './Pages/User/EnrollCourse';
 import UserList from './Pages/User/UserList';
+import ExamPage from './Pages/User/ExamPage';
 
 function App() {
   return (
@@ -60,9 +61,9 @@ function App() {
                 <Route path='questionlist' element={ <QuestionList/>}/>
               </Route>
               <Route path='enrollcourse/:userId/:Iid' element={<EnrollCourse/>}/>
-              <Route path='result/:Id' element={<Result/>}/>
+              <Route path='result/:userId' element={<Result/>}/>
+              <Route path="exampage/:Exid" element={<ExamPage/> }/>
             </Route>
-            
             {/* Page Not Found */}
             <Route path="loader" element={<Loader/> }/>
             <Route path='*' element={ <NotFound/>} />

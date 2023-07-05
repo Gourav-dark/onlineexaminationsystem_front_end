@@ -39,8 +39,8 @@ const Subject = () => {
                 <div className="col-5">{Subject.subjectCode}</div>
             </div>
             <div className="mt-2 py-1 d-flex justify-content-around border-top border-dark border-2">
-                <NavLink className="btn btn-sm btn-dark" to="examlist">Exams List</NavLink>
-                <NavLink className="btn btn-sm btn-dark" to="questionlist">Questions List</NavLink>
+                <NavLink className="btn btn-sm btn-outline-dark" to="examlist">Exams List</NavLink>
+                <NavLink className="btn btn-sm btn-outline-dark" to="questionlist">Questions List</NavLink>
             </div>
         </div>
         <Outlet/>    

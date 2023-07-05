@@ -13,7 +13,7 @@ const SubjectItem = ({ item,handleDelete,role}) => {
     setshowExam(!showExam);
   }
   return (
-    <div className="row mx-2 bg-secondary border border-dark border-1 border-top-0 text-light">
+    <div className="row mx-2 bg-secondary border border-light border-1 border-top-0 text-info">
         <div className="col-3 ms-1 mt-1">
           {item.subjectName}
         </div>

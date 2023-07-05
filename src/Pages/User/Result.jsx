@@ -3,8 +3,11 @@ import { useEffect } from "react";
 import { useContext } from "react";
 import Loader from "../../Components/Loader";
 import { AuthContext } from "../../Config/AuthProvider";
-
+import { useAllResultsApi, useResultsUserIdApi } from "../../Config/ResultAPI";
+import ResultItem from "../../Components/ResultItem";
+import { useParams } from "react-router-dom";
 const Result = () => {
+  const { userId } = useParams();
   const {token,user}=useContext(AuthContext);
   const [Loading,setLoading]=useState(false);
   const [ResultList,setResultList]=useState([]);
@@ -16,21 +19,45 @@ const Result = () => {
     else if(user.Role==="InstituteUser"){
       InsResult();
     }
-    else if(user.Role==="Admin"){
+    else if(user.Role==="Student"){
       StuResult();
     }
   },[]);
   //result for Institute
   const InsResult=()=>{
-
+    
   }
   //result for Student 
-  const StuResult=()=>{
-    
+  const callApiByuserId = useResultsUserIdApi();
+  const StuResult=async()=>{
+    setLoading(true);
+    const data = {
+      token,userId
+    }
+    const res = await callApiByuserId(data);
+    if (res.StatusCode === 200) {
+      setResultList(res.Data);
+      // console.log(res.Data);
+    } else {
+      console.log(res);
+    }
+    setLoading(false);
   }
   //result for Admin
-  const AdmResult=()=>{
-    
+  const AdminResult = useAllResultsApi();
+  const AdmResult = async () => {
+    setLoading(true);
+    const data = {
+      token
+    }
+    const res = await AdminResult(data);
+    if (res.StatusCode === 200) {
+      setResultList(res.Data);
+      // console.log(res.Data);
+    } else {
+      console.log(res);
+    }
+    setLoading(false);
   }
   return (
     <div className="mt-2 mx-2">
@@ -38,13 +65,18 @@ const Result = () => {
         Result Details:
       </div>
       <div className="row mt-2 text-white bg-dark rounded-top-2 py-1 border-2 border-bottom">
-        <div className="col-3 d-flex justify-content-center align-items-center">Exam Name</div>
-        <div className="col-3 d-flex justify-content-center align-items-center">Student Name</div>
+        <div className="col-3 d-flex justify-content-center align-items-center">Exam Id</div>
+        <div className="col-3 d-flex justify-content-center align-items-center">Student Id</div>
         <div className="col-2 d-flex justify-content-center align-items-center">Total Marks</div>
         <div className="col-1 d-flex justify-content-center align-items-center">Obtained</div>
         <div className="col-1 d-flex justify-content-center align-items-center">%</div>
         <div className="col-2 d-flex justify-content-center align-items-center">Grade</div>
       </div>
+      {
+        ResultList.map((item) => (
+          <ResultItem item={item} key={item.id} />
+        ))
+      }
       {Loading && <Loader/>}
     </div>
   )

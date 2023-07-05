@@ -12,10 +12,11 @@ const QuestionList = () => {
   const { token,user } = useContext(AuthContext);
   const [questions, setQuestions] = useState([]);
   const [Model, setModel] = useState(false);
-  const callListApi=useQuestionsBySid();
   useEffect(() => {
-      fun();
+    fun();
   }, [Model, Sid]);
+  //Question List by EXam Id
+  const callListApi=useQuestionsBySid();
   const fun = async () => {
     const data = {
       Sid, token
@@ -39,15 +40,18 @@ const QuestionList = () => {
       {/* <QuestionItem
         item={Item}
       /> */}
+        <ol>
       {
         Object.keys(questions).length !== 0 ?
-            questions.map((item) =>
-                <QuestionItem key={item.id} item={item} />)
-        :
-        <div className="alert alert-danger mx-3 py-1 " role="alert">
+          questions.map((item) =>
+              <QuestionItem key={item.id} item={item} />
+            )
+            :
+            <div className="alert alert-danger mx-3 py-1 " role="alert">
                 {Message}
         </div>
       }
+      </ol>
       {/* Hide Data */}
       <QuestionOption
         Sid={Sid}
