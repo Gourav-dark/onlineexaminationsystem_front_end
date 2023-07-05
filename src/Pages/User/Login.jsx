@@ -3,10 +3,12 @@ import { BiLogIn } from "react-icons/bi";
 import { useState, useContext } from "react";
 import useLoginAPI from '../../Config/UserAPI';
 import { AuthContext } from "../../Config/AuthProvider";
+import Loader from "../../Components/Loader";
 
 import "../../Assets/Styles/Login.css";
 
 const Login = () => {
+  const [Loading,setLoading]=useState(false);
   //Access access
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -27,6 +29,7 @@ const Login = () => {
 
   const loginAPI = useLoginAPI();
   const handleSubmit = async () => {
+    setLoading(true);
     const response = await loginAPI(loginDetail);
       setMessage(response.Message);
     if (response.StatusCode === 200) {
@@ -41,6 +44,7 @@ const Login = () => {
         setclassname("alert-danger");
       // window.location.reload();
     }
+    setLoading(false);
   };
   const closebtn=()=>{
     setshow(!show);
@@ -60,12 +64,12 @@ const Login = () => {
                     <p className="text-white-50 mb-5">Please enter your Email and password!</p>
 
                     <div className="form-outline form-white mb-2">
-                      <input type="email" id="typeEmailX" className="form-control form-control-lg" name='Email' value={loginDetail.Email} onChange={handleInput}/>
+                      <input type="email" id="typeEmailX" className="form-control form-control-lg" name='Email' value={loginDetail.Email} onChange={handleInput} required placeholder='Email'/>
                       <label className="form-label mt-1">Email</label>
                     </div>
 
                     <div className="form-outline form-white mb-3">
-                      <input type="password" id="typePasswordX" className="form-control form-control-lg" name='Password' value={loginDetail.Password} onChange={handleInput}/>
+                      <input type="password" id="typePasswordX" className="form-control form-control-lg" name='Password' value={loginDetail.Password} onChange={handleInput} required placeholder='Password'/>
                       <label className="form-label mt-1">Password</label>
                     </div>
 
@@ -89,6 +93,7 @@ const Login = () => {
             <button type="button" className="btn-close" onClick={closebtn}></button>
         </div>
       }
+      {Loading && <Loader/>}
     </div>
   );
 };

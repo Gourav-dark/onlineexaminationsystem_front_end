@@ -108,3 +108,31 @@ export const useAllCourseListApi = () => {
     }
     return IcourseListApi;
 };
+
+export const useFindCourseApi = () => {
+    const Response = {
+        Data:{},
+        Message:'',
+        StatusCode: 400
+    };
+    const ConfigApi = async (data) => {
+        // console.log(data);
+        try {
+            const res = await API.get(`${URL}FindCourse/${data.Cid}`, {
+              headers: {
+                    'Authorization': `Bearer ${data.token}`
+                }
+          });
+            // console.log(res);
+            Response.Data = res.data;
+            Response.StatusCode = res.status;
+            Response.Message = "";
+        } catch (error) {
+            Response.Message = error.response.data;
+            Response.StatusCode = error.response.status;
+            console.log(error);
+        }
+        return Response;
+    }
+    return ConfigApi;
+};

@@ -6,7 +6,7 @@ const SubjectList = ({Cid}) => {
     const [Message,setMessage]=useState("");
     const [showSubjectlist, setSubjectlist] = useState([]);
     
-    const { token } = useContext(AuthContext);
+    const { token,user } = useContext(AuthContext);
     const callListApi= useISubjectbyCourseId();
     useEffect(() => {
         fun();
@@ -39,7 +39,7 @@ const SubjectList = ({Cid}) => {
     }
     return (
         <div className="SubjectList">
-            <div className="row mx-3 mt-1 bg-secondary rounded-top-2 border-bottom border-dark border-2 py-1 text-light">
+            <div className="row mx-2 mt-1 bg-dark rounded-top-2 border-bottom border-light border-2 py-1 text-light">
                     <div className="col-3">Subject Name</div>
                     <div className="col-3">Subject Code</div>
                     <div className="col-6 d-flex justify-content-center">More Option</div>
@@ -47,9 +47,9 @@ const SubjectList = ({Cid}) => {
             {
                 Object.keys(showSubjectlist).length !== 0 ?
                     showSubjectlist.map((item) =>
-                        <SubjectItem key={item.id} item={item} handleDelete={handleDelete} />)
+                        <SubjectItem key={item.id} item={item} handleDelete={handleDelete} role={user.Role} />)
                 :
-                <div className="alert alert-danger mx-3 py-1 " role="alert">
+                <div className="alert alert-danger mx-2 py-1 " role="alert">
                         {Message}
                 </div>
              }

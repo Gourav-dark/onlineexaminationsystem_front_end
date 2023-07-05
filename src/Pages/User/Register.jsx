@@ -129,7 +129,25 @@ const Register = () => {
                 setclassname("alert-success");
                 setMessage(Res.Message+" Please visit Login Page.");
                 // console.log(Res.Message);
-                //Redirect Code and Message 
+                //Redirect Code and Message
+                setInstituteDetail({
+                    instituteName: "",
+                    location: "",
+                    city: "",
+                    postalCode: "",
+                    state: "",
+                    country: ""
+                });
+                setUserDetail({
+                    fname: "",
+                    lname: "",
+                    gender: "",
+                    dob: "",
+                    email: "",
+                    phoneNumber: "",
+                    password: "",
+                    confirmPassword: ""
+                });
             } else {
                 setshow(!show);
                 setclassname("alert-danger");
