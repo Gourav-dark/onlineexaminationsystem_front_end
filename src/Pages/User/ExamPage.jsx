@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Config/AuthProvider";
 import { useFindExam } from "../../Config/ExamAPI";
 import { useQuestionsBySid } from "../../Config/QuestionAPI";
@@ -7,6 +7,7 @@ import Loader from "../../Components/Loader";
 import Timer from "../../Components/Timer";
 
 const ExamPage = () => {
+  const Navigate=useNavigate();
   const { Exid } = useParams();
   const { token, user } = useContext(AuthContext);
   const [ExamDetail, setExamDetail] = useState({});
@@ -51,8 +52,7 @@ const ExamPage = () => {
       console.log(res.Message);
     }
     setLoading(false);
-  };
-  // const targetTime = new Date("2023-07-05T23:00:00"); 
+  }; 
   const targetTime = new Date(`${ExamDetail.date} ${ExamDetail.time}`);
   return (
     <div className="ExamPage mt-2">
@@ -97,6 +97,9 @@ const ExamPage = () => {
           })
         }
         </ol>
+      <div className="d-flex justify-content-end">
+        <button className="btn btn-success btn-lg py-1" onClick={()=>Navigate(`/profile/result/${user.UserId}`)}>Submit</button>
+      </div>
       </div>
       {Loading && <Loader />}
     </div>

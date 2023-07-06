@@ -14,7 +14,7 @@ const ProfileHeader = () => {
   const { isAuthenticated, user, logout } = useContext(AuthContext);
   useEffect(() => {
     if (!isAuthenticated) {
-      Navigate("/login");
+      Navigate("/");
     }
   });
   var [Ismenu, setIsmenu] = useState(true);
@@ -113,7 +113,7 @@ const ProfileHeader = () => {
           {Ismenu?<BiMenu/>:<BiMenuAltLeft/>}
         </div>
         {/* online Examination System logo */}
-        <Link to="/profile" className="navbar-brand ms-2 fs-6 initialism">Online Examination System</Link>
+        <Link to="/profile" className="navbar-brand ms-2 fs-6 initialism">Exam Quiz</Link>
         {/* Top Nav Bar button */}
         <div className="profile-logo d-flex gap-2">
           <button className="btn btn-outline-light" onClick={()=>Navigate("/profile")}>

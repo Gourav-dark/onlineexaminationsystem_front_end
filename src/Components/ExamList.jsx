@@ -50,7 +50,8 @@ const ExamList = (props) => {
     <div className="ExamDetail bg-light rounded-2 mt-1 py-1">
         <div className="bg-dark mx-2 my-1 rounded-2 text-light d-flex justify-content-between align-items-center">
             <span className="ms-2 p-1">Exam Details : </span>
-            {user.Role==="InstituteUser" &&
+            {
+              user.Role!=="Admin" &&
               <button className="btn btn-primary btn-sm me-2 my-1" onClick={showAddModel}>Add Exam</button>
             }
         </div>

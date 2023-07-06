@@ -37,7 +37,9 @@ const Login = () => {
       setclassname("alert-success");
       login(response.Token);
 
-      navigate('/profile');
+      // navigate('/profile');
+      setTimeout(()=>navigate("/profile"),1000);
+      // navigate("/profile");
       //Redireact Code for profile
     } else {
         setshow(!show);

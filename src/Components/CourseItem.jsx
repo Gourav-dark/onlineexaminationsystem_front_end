@@ -4,7 +4,7 @@ import { BiCaretRight,BiCaretDown } from "react-icons/bi";
 import SubjectList from "./SubjectList";
 import SubjectOption from "./SubjectOption";
 
-export const CourseItem = ({ item,handleDelete}) => {
+export const CourseItem = ({ item,handleDelete,role}) => {
     const [showSList, setshowSList] = useState(false);
     const [showAddSubject, setshowAddSubject] = useState(false);
     const handleshowaddsubject = () => {
@@ -25,9 +25,13 @@ export const CourseItem = ({ item,handleDelete}) => {
             </div>
             <div className='col-3 my-2'>{item.departmentName}</div>
             <div className="col-6 d-flex justify-content-center gap-1">
-                <button className='btn btn-sm btn-outline-info my-1'>Edit</button>
                 <button className='btn btn-sm btn-outline-danger my-1' onClick={()=>handleDelete(item.id)}>Delete</button>
-                <button className='btn btn-sm btn-outline-success my-1' onClick={handleshowaddsubject}>Add Subject</button>
+                {role!=="Admin" &&
+                    <>
+                        {/* <button className='btn btn-sm btn-outline-info my-1'>Edit</button> */}
+                        <button className='btn btn-sm btn-outline-success my-1' onClick={handleshowaddsubject}>Add Subject</button>
+                    </>
+                }
             </div>
             {showSList && <SubjectList Cid={item.id} />}
             {/* hode Item for Course */}

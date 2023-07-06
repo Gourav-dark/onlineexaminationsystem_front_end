@@ -33,13 +33,12 @@ const QuestionList = () => {
    }
   return (
     <div className="bg-light mx-1 mt-1 rounded-2 p-1">
-      <h6 className="mx-2 bg-dark text-light rounded-2 d-flex justify-content-between align-items-center">
+      <h6 className="mx-2 py-2 bg-dark text-light rounded-2 d-flex justify-content-between align-items-center">
         <span className="mx-2">Question List :</span>
+        {user.Role!=="Admin" &&
         <button className="mx-2 my-1 btn btn-sm btn-primary" onClick={showAddmodel}>Add Question</button>
+        }
       </h6>
-      {/* <QuestionItem
-        item={Item}
-      /> */}
         <ol>
       {
         Object.keys(questions).length !== 0 ?

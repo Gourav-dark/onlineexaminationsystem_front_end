@@ -56,3 +56,30 @@ export const useResultsUserIdApi = () => {
     }
     return configApi;
 };
+// 1.Add Result list
+export const useAddResultsApi = () => {
+    const Response = {
+        Message: "Page Not Found",
+        StatusCode: 404
+    };
+    const configApi = async (data) => {
+        // console.log(data);
+        try {
+            const res = await API.post(`${URL}AddResult?sId=${data.userId}&eId=${data.Exid}`,data.Data,{
+                headers: {
+                    'Authorization': `Bearer ${data.token}`
+                }
+            });
+            Response.Data=res.data;
+            Response.StatusCode = res.status;
+            Response.Message = "";
+            console.log(res.data);
+        }catch(error){
+            Response.Message = error.response.data;
+            Response.StatusCode = error.response.status;
+            console.log(error);
+        }
+        return Response;
+    }
+    return configApi;
+};

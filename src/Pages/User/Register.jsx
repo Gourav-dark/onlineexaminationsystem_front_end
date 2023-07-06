@@ -6,8 +6,11 @@ import { useRegisterInstituteApi } from "../../Config/InstituteAPI";
 
 //CSS
 import "../../Assets/Styles/Register.css";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+    //Naviage
+    const Navigate=useNavigate();
     //Message shower
     const [classname,setclassname]=useState("");
     const [show,setshow]=useState(false);
@@ -148,6 +151,9 @@ const Register = () => {
                     password: "",
                     confirmPassword: ""
                 });
+                // setTimeout(1000*5);
+                // Navigate("/login");
+                setTimeout(()=>Navigate("/login"),1000);
             } else {
                 setshow(!show);
                 setclassname("alert-danger");

@@ -1,8 +1,15 @@
-.Home {
+/* .Home {
     display: flex;
     justify-content: center;
 }
 .Home .my_slider{
     margin-top: 1rem;
     width: 60%;
+} */
+.Home{
+    height: 92vh;
+    width: 100%;
+    background-image: url("../Images/bgHome.png") !important;
+    background-size: cover;
+    background-position: center;
 }

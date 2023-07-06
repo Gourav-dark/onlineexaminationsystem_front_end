@@ -101,9 +101,11 @@ const Course = () => {
         <div className="row bg-light mt-2 mx-2 rounded-top-2 py-1 border-bottom border-dark border-3">
           <div className="col-3">Course Name</div>
           <div className="col-3">Department</div>
+          {/* {user.Role!=="Admin" && */}
           <div className="col-6 d-flex justify-content-center">More Options</div>
+          {/* } */}
         </div>
-            {courseList.map((item) => <CourseItem key={item.id} item={item} handleDelete={handleDelete} />)}
+            {courseList.map((item) => <CourseItem key={item.id} item={item} handleDelete={handleDelete} role={user.Role} />)}
       </div>
       {/* Not Diplsay Contant */}
       <CourseOption

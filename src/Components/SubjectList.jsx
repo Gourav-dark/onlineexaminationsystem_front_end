@@ -42,7 +42,7 @@ const SubjectList = ({Cid}) => {
             <div className="row mx-2 mt-1 bg-dark rounded-top-2 border-bottom border-light border-2 py-1 text-light">
                     <div className="col-3">Subject Name</div>
                     <div className="col-3">Subject Code</div>
-                    <div className="col-6 d-flex justify-content-center">More Option</div>
+                    <div className="col-6 d-flex justify-content-center">More Options</div>
             </div>
             {
                 Object.keys(showSubjectlist).length !== 0 ?

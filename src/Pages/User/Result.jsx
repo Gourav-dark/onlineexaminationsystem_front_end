@@ -66,16 +66,21 @@ const Result = () => {
       </div>
       <div className="row mt-2 text-white bg-dark rounded-top-2 py-1 border-2 border-bottom">
         <div className="col-3 d-flex justify-content-center align-items-center">Exam Id</div>
-        <div className="col-3 d-flex justify-content-center align-items-center">Student Id</div>
+        <div className="col-3 d-flex justify-content-center align-items-center">Student Name</div>
         <div className="col-2 d-flex justify-content-center align-items-center">Total Marks</div>
         <div className="col-1 d-flex justify-content-center align-items-center">Obtained</div>
         <div className="col-1 d-flex justify-content-center align-items-center">%</div>
         <div className="col-2 d-flex justify-content-center align-items-center">Grade</div>
       </div>
       {
-        ResultList.map((item) => (
+        Object.keys(ResultList).length !== 0 ?
+        (ResultList.map((item) => (
           <ResultItem item={item} key={item.id} />
-        ))
+        ))):(
+          <div className="alert alert-danger mx-0 mt-1 py-1 ">
+            No Result Available
+          </div>
+        )
       }
       {Loading && <Loader/>}
     </div>

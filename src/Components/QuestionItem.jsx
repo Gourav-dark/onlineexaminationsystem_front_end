@@ -12,8 +12,8 @@ const QuestionItem = ({item}) => {
           </ol>
           <p className="p-0 m-0 border px-2 rounded-2">Correct Anserer : {item.correctOption}</p>
           <div className="mt-1 d-flex gap-1 justify-content-end">
-            <button className="btn btn-sm btn-outline-info">Edit Question</button>
-            <button className="btn btn-sm btn-outline-danger">Delete</button>
+            {/* <button className="btn btn-sm btn-outline-info">Edit Question</button> */}
+            {/* <button className="btn btn-sm btn-outline-danger">Delete</button> */}
           </div>
     </div>
   )

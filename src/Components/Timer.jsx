@@ -7,7 +7,7 @@ const Timer = ({ targetTime }) => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
-    }, 1000*5); // Update time every second (1000 milliseconds)
+    }, 1000); // Update time every second (1000 milliseconds)
 
     return () => {
       clearInterval(timer);
@@ -29,7 +29,7 @@ const Timer = ({ targetTime }) => {
     <>
         Time:{formatTime(currentTime)}
         &nbsp;&nbsp;  
-        Minutes Left:{minutesLeft}
+        {/* Minutes Left:{minutesLeft} */}
     </>
   );
 };

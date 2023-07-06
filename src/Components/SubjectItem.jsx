@@ -27,8 +27,11 @@ const SubjectItem = ({ item,handleDelete,role}) => {
           ):
           (
             <>
+            {role!=="Admin" &&<>
             <button className='btn btn-sm btn-info my-1' onClick={handleEdit}>Edit</button>
             <button className='btn btn-sm btn-danger my-1' onClick={()=>handleDelete(item.id)}>Delete</button>
+            </>
+            }
             <button className='btn btn-sm btn-success my-1' onClick={() => Navigate(`/profile/subject/${item.id}`)}>More Options</button>
             </>
           )
