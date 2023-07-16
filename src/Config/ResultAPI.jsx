@@ -57,15 +57,16 @@ export const useResultsUserIdApi = () => {
     return configApi;
 };
 // 1.Add Result list
-export const useAddResultsApi = () => {
+export const useGenerateResultsApi = () => {
     const Response = {
+        Data:"",
         Message: "Page Not Found",
         StatusCode: 404
     };
     const configApi = async (data) => {
         // console.log(data);
         try {
-            const res = await API.post(`${URL}AddResult?sId=${data.userId}&eId=${data.Exid}`,data.Data,{
+            const res = await API.post(`${URL}GenerateResult?sId=${data.userId}&eId=${data.Exid}`,data.Data,{
                 headers: {
                     'Authorization': `Bearer ${data.token}`
                 }

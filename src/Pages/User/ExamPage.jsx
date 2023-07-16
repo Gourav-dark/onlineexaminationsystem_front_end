@@ -5,6 +5,7 @@ import { useFindExam } from "../../Config/ExamAPI";
 import { useQuestionsBySid } from "../../Config/QuestionAPI";
 import Loader from "../../Components/Loader";
 import Timer from "../../Components/Timer";
+import { useGenerateResultsApi } from "../../Config/ResultAPI";
 
 const ExamPage = () => {
   const Navigate=useNavigate();
@@ -54,6 +55,34 @@ const ExamPage = () => {
     setLoading(false);
   }; 
   const targetTime = new Date(`${ExamDetail.date} ${ExamDetail.time}`);
+  // Genrate Result 
+  const callapiforresult=useGenerateResultsApi();
+  const ResultGenerate = async() => {
+    const data = {
+      userId: user.UserId,
+      Exid,
+      token,
+      Data:QuestionList
+    }
+    const res = await callapiforresult(data);
+    if (res.StatusCode === 200) {
+      console.log(res);
+      Navigate(`/profile/result/${user.UserId}`);
+
+    } else {
+      console.log(res);
+    }
+  }
+  const SelectOption = (event) => {
+    const { name, value } = event.target;
+    // console.log(name, value);
+    setQuestions((QuestionList) => {
+      const newList = [...QuestionList];
+      newList[name].correctOption = value;
+      return newList;
+    });
+    // console.log(QuestionList[name]);
+  }
   return (
     <div className="ExamPage mt-2">
       <div className="mt-1 p-2 bg-dark text-light mx-2 rounded-3 d-flex justify-content-between">
@@ -65,30 +94,30 @@ const ExamPage = () => {
       <div className="Questioncontainer mx-2 mt-2">
         <ol type="1" className="bg-light border border-1 border-dark rounded-2 py-2">
         {
-          QuestionList.map((ques) => {
+          QuestionList.map((ques,index) => {
             return (
               <li className="Question my-1">
                 {ques.questionTitle}
                 <div class="form-check">
-                  <input className="form-check-input" type="radio" name={ques.id} value="A"/>
+                  <input className="form-check-input" type="radio" name={index} value="A" onChange={SelectOption}/>
                   <label className="form-check-label">
                     {ques.option_A}
                   </label>
                 </div>
                 <div class="form-check">
-                  <input className="form-check-input" type="radio" name={ques.id} value="B"/>
+                  <input className="form-check-input" type="radio" name={index} value="B" onChange={SelectOption}/>
                   <label className="form-check-label">
                     {ques.option_B}
                   </label>
                 </div>
                 <div class="form-check">
-                  <input className="form-check-input" type="radio" name={ques.id} value="A"/>
+                  <input className="form-check-input" type="radio" name={index} value="C" onChange={SelectOption}/>
                   <label className="form-check-label">
                     {ques.option_C}
                   </label>
                 </div>
                 <div class="form-check">
-                  <input className="form-check-input" type="radio" name={ques.id} value="A"/>
+                  <input className="form-check-input" type="radio" name={index} value="D" onChange={SelectOption}/>
                   <label className="form-check-label">
                     {ques.option_D}
                   </label>
@@ -98,7 +127,7 @@ const ExamPage = () => {
         }
         </ol>
       <div className="d-flex justify-content-end">
-        <button className="btn btn-success btn-lg py-1" onClick={()=>Navigate(`/profile/result/${user.UserId}`)}>Submit</button>
+        <button className="btn btn-success btn-lg py-1" onClick={ResultGenerate}>Submit</button>
       </div>
       </div>
       {Loading && <Loader />}
